@@ -16,7 +16,7 @@ int main()
             case 0: break;
             default: {
                 system("cls");
-                printf("\n\n..:{ Hello World! }:..\n\n");
+                printf("\n\n..:{ Hola Mundo! }:..\n\n");
                 system("pause");
             }
         }
