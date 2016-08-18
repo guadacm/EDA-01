@@ -7,6 +7,9 @@ int main()
 
     while (opcion != 0){
         system("cls");
+        printf("*********\n");
+        printf("***EDA***\n");
+        printf("*********\n");
         printf("\n[1] Opcion 1");
         printf("\n[2] Opcion 2");
         printf("\n\n[0] Salir\n");
