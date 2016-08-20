@@ -5,6 +5,8 @@
 void administracion(int *op);
 void comparacion(int *op);
 void menu_LSD(int *op);
+void menu_LSO(int *op);
+void menu_LVO(int *op);
 /* FIN PROTOTIPOS */
 
 void encabezado()
