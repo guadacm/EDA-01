@@ -1,27 +1,55 @@
+/*
+ *
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
+#include "menus.h"
+#include "LSD.h"
+#include "LSO.h"
+#include "LVO.h"
 
 int main()
 {
     int opcion = 1;
 
-    while (opcion != 0){
-        system("cls");
-        printf("*********\n");
-        printf("***EDA***\n");
-        printf("*********\n");
-        printf("\n[1] Opcion 1");
-        printf("\n[2] Opcion 2");
-        printf("\n\n[0] Salir\n");
-        printf("\nElija una opcion: ");
-        scanf("%d", &opcion);
-        switch (opcion){
-            case 0: break;
-            default: {
-                system("cls");
-                printf("\n\n..:{ Hola Mundo! }:..\n\n");
-                system("pause");
-            }
+    while (opcion != 0)
+    {
+        principal(&opcion);
+        switch (opcion)
+        {
+            case 0: break; // Salir
+            case 1: // Menu Administracion de estructuras
+                {
+                    while (opcion != 0)
+                    {
+                        admin(&opcion);
+                        switch (opcion)
+                        {
+                            case 0: break; //Volver al menu anterior
+                            case 1: //Menu LSD
+                                while (opcion !=0)
+                                {
+                                    menu_LSD(&opcion);
+                                    switch (opcion)
+                                    {
+                                        case 0: break;
+                                    }
+                                    opcion = -1;
+                                    break;
+                                }
+                            case 2: //Menu LSO
+                                break;
+                            case 3: //Menu LVO
+                                break;
+                        }
+                    }
+                    opcion = -1;
+                    break;
+
+                }
+
+            case 2: break;
         }
     }
     return 0;
