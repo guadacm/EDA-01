@@ -5,6 +5,8 @@
 void menu_LSD(int *op)
 {
     encabezado();
+    printf("Lista Secuencial Desordenada\n");
+    printf("_____________________________\n");
     printf("\n[1] ");
     printf("\n[2] ");
     printf("\n\n[0] Volver\n");

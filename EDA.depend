@@ -1,17 +1,19 @@
 # depslib dependency file v1.0
-1471671838 source:c:\users\guada\desktop\pm\eda\main.c
+1471720872 source:c:\users\guada\desktop\pm\eda\main.c
 	<stdio.h>
 	<stdlib.h>
-	"menus.h"
+	"principal.h"
 	"LSD.h"
 	"LSO.h"
 	"LVO.h"
 
-1471670893 c:\users\guada\desktop\pm\eda\menus.h
+1471720455 c:\users\guada\desktop\pm\eda\menus.h
 
-1471670886 c:\users\guada\desktop\pm\eda\lsd.h
+1471717614 c:\users\guada\desktop\pm\eda\lsd.h
 
 1471670884 c:\users\guada\desktop\pm\eda\lso.h
 
 1471670881 c:\users\guada\desktop\pm\eda\lvo.h
+
+1471721210 c:\users\guada\desktop\pm\eda\principal.h
 
