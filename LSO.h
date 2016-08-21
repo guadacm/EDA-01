@@ -2,6 +2,9 @@
 #ifndef LSO_H_INCLUDED
 #define LSO_H_INCLUDED
 
+Articulo estructura_LSO[dim];
+int cant_LSO;
+
 void menu_LSO(int *op)
 {
     while (*op != 0)

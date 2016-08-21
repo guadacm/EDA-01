@@ -35,7 +35,6 @@ char c[8];
 int celda;
 
 
-
 void encabezado()
 {
     system("cls");
