@@ -4,6 +4,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "principal.h"
 #include "LSD.h"
 #include "LSO.h"
@@ -11,6 +12,8 @@
 
 int main()
 {
+    initLS(Estructura_LSD);
+
     int opcion = 1;
 // -- MENU PRINCIPAL
     while (opcion != 0)

@@ -1,5 +1,16 @@
 #ifndef PRINCIPAL_H_INCLUDED
 #define PRINCIPAL_H_INCLUDED
+#define dim 170
+
+typedef struct Articulo
+{
+	char codigo[8];
+	char articulo[52];
+	char marca[62];
+	char club[72];
+	float valor;
+	int cantidad;
+} Articulo;
 
 /* PROTOTIPOS*/
 void administracion(int *op);
@@ -7,14 +18,30 @@ void comparacion(int *op);
 void menu_LSD(int *op);
 void menu_LSO(int *op);
 void menu_LVO(int *op);
+
+void initLS (Articulo []);	            //sirve para LSD y/o LSO
+int totalArticulos (Articulo []);       //sirve para LSD y/o LSO
+void mostrar_LS (Articulo []);          //sirve para LSD y/o LSO
+
+int localizar_LSD(char [], int *);
+Articulo nuevoArticulo_LSD(char []);
+int alta_LSD(char [], int );
 /* FIN PROTOTIPOS */
+
+
+Articulo temp;
+Articulo Estructura_LSD[dim];
+char c[8];
+int celda;
+
+
 
 void encabezado()
 {
     system("cls");
-    printf("****************************************\n");
-    printf("*** ESTRUCTURA DE DATOS Y ALGORITMOS ***\n");
-    printf("****************************************\n\n");
+    printf("\n\t****************************************\n");
+    printf("\t*** ESTRUCTURA DE DATOS Y ALGORITMOS ***\n");
+    printf("\t****************************************\n\n");
 }
 
 // -- MENU PRINCIPAL
