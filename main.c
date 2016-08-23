@@ -12,7 +12,7 @@
 
 int main()
 {
-    initLS(Estructura_LSD);
+    initLS(LSD);
 
     int opcion = 1;
 // -- MENU PRINCIPAL

@@ -1,6 +1,6 @@
 #ifndef PRINCIPAL_H_INCLUDED
 #define PRINCIPAL_H_INCLUDED
-#define dim 170
+#define DIM 170
 
 typedef struct Articulo
 {
@@ -26,13 +26,19 @@ void mostrar_LS (Articulo []);          //sirve para LSD y/o LSO
 int localizar_LSD(char [], int *);
 Articulo nuevoArticulo_LSD(char []);
 int alta_LSD(char [], int );
+
+int localizar_LSO(char codArt[], int *posicion);
+int alta_LSO(Articulo nuevo, int entrada);
 /* FIN PROTOTIPOS */
 
 
 Articulo temp;
-Articulo Estructura_LSD[dim];
+Articulo LSD[DIM];
+int cant_LSD = 0;
 char c[8];
 int celda;
+Articulo LSO[DIM];
+int cant_LSO;
 
 
 void encabezado()
