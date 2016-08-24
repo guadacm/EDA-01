@@ -32,13 +32,16 @@ void menu_LSO(int *op)
                 Articulo nuevo;
                 printf("\nIngrese el codigo del nuevo articulo: ");
                 fflush(stdin);
-                scanf("%s",nuevo.codigo);
+                scanf("%s", nuevo.codigo);
                 alta_LSO(nuevo, 0);
                 system("pause");
                 break;
             case 2: printf("Algo\n"); system("pause"); break;
             case 3: printf("Algo\n"); system("pause"); break;
-            case 4: printf("Algo\n"); system("pause"); break;
+            case 4:
+                mostrar_LS(LSO, cant_LSO);
+                system("pause");
+                break;
             case 5: printf("Algo\n"); system("pause"); break;
         }
     }
@@ -77,6 +80,7 @@ int localizar_LSO(char codArt[], int *posicion) //-- DEVUELVE: 1.Exito 0.Fracaso
     }
     else
     {
+        *posicion = 0;
         return 0;
     }
 }

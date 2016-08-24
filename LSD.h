@@ -56,7 +56,7 @@ void menu_LSD(int *op)
             break;
 
         case 4:
-            mostrar_LS(LSD);
+            //mostrar_LS(LSD);
             system("pause");
             break;
 
@@ -87,7 +87,7 @@ int totalArticulos (Articulo LS[])           // total de articulos dentro de una
     return total;
 }
 
-void mostrar_LS (Articulo LS[])             // Muestra la lista de articulos para LSD ò LSO
+/*void mostrar_LS (Articulo LS[])             // Muestra la lista de articulos para LSD ò LSO
 {
     int total,i;
     total=totalArticulos(LS);
@@ -108,7 +108,7 @@ void mostrar_LS (Articulo LS[])             // Muestra la lista de articulos par
         printf("\n \n");
     }
     printf("\n\tTotal de articulos: %d \n\n",total);
-}
+}*/
 
 int localizar_LSD(char codigo[], int *i)            //Localizacion Exitosa=1, noExitosa=0, i=posicion donde esta el elemento o deberia estar
 {

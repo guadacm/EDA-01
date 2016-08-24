@@ -19,16 +19,22 @@ void menu_LSD(int *op);
 void menu_LSO(int *op);
 void menu_LVO(int *op);
 
+    // PROTOTIPOS COMUNES
 void initLS (Articulo []);	            //sirve para LSD y/o LSO
 int totalArticulos (Articulo []);       //sirve para LSD y/o LSO
-void mostrar_LS (Articulo []);          //sirve para LSD y/o LSO
+//void mostrar_LS (Articulo []);         //sirve para LSD y/o LSO
+void mostrar_LS (Articulo LS[], int cant);
 
+    // LSD
 int localizar_LSD(char [], int *);
 Articulo nuevoArticulo_LSD(char []);
 int alta_LSD(char [], int );
 
+    // LSO
 int localizar_LSO(char codArt[], int *posicion);
 int alta_LSO(Articulo nuevo, int entrada);
+
+    // LSV
 /* FIN PROTOTIPOS */
 
 
@@ -83,8 +89,8 @@ void administracion(int *op)
         {
             case 0: break;
             case 1: menu_LSD(op); break;
-            case 2: printf("Algo\n"); break;
-            case 3: printf("Algo\n"); break;
+            case 2: menu_LSO(op); break;
+            case 3: menu_LVO(op); break;
         }
     }
     *op = -1;
@@ -104,4 +110,30 @@ void comparacion(int *op)
 
 }
 
+
+void mostrar_LS (Articulo LS[], int cant)             // Muestra la lista de articulos para LSD ò LSO
+{
+    int i;
+    if(cant == 0)
+    {
+        printf("\n\tLa lista esta vacia\n");
+        return;
+    }
+    else
+    {
+        printf("\n\t----------LISTA DE ARTICULOS----------\n");
+        for(i = 0; i < cant; i++)
+        {
+            printf("\n Codigo: \t%s",LS[i].codigo);
+            printf("\n Articulo: \t%s",LS[i].articulo);
+            printf("\n Marca: \t%s",LS[i].marca);
+            printf("\n Club: \t\t%s",LS[i].club);
+            printf("\n Valor: \t$%.2f",LS[i].valor);
+            printf("\n Cantidad: \t%d",LS[i].cantidad);
+            printf("\n \n");
+        }
+        printf("\n\tTotal de articulos: %d \n\n",cant);
+    }
+
+}
 #endif // PRINCIPAL_H_INCLUDED
