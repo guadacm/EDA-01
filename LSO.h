@@ -7,6 +7,8 @@
 void menu_LSO(int *op)
 {
     cant_LSO = 0; // -- Inicializo la lista
+    strcpy(LSO[0].codigo, "ZZZZZZ");
+
     while (*op != 0)
     {
         encabezado();
@@ -30,10 +32,16 @@ void menu_LSO(int *op)
                 printf("_________________________\n");
                 printf("\n[1] Nuevo articulo");
                 Articulo nuevo;
-                printf("\nIngrese el codigo del nuevo articulo: ");
+                int alta;
+                printf("\n\nCodigo: ");
                 fflush(stdin);
                 scanf("%s", nuevo.codigo);
-                alta_LSO(nuevo, 0);
+                strupr(nuevo.codigo);
+                alta = alta_LSO(nuevo, 0);
+                if(alta == 0)
+                    printf("\nEl articulo ya existe\n\n");
+                else
+                    printf("\nEl articulo se agrego a la lista exitosamente\n\n");
                 system("pause");
                 break;
             case 2: printf("Algo\n"); system("pause"); break;
@@ -42,7 +50,10 @@ void menu_LSO(int *op)
                 mostrar_LS(LSO, cant_LSO);
                 system("pause");
                 break;
-            case 5: printf("Algo\n"); system("pause"); break;
+            case 5:
+                memorizacion_previa(2);
+                system("pause");
+                break;
         }
     }
     *op = -1;
@@ -52,24 +63,24 @@ void menu_LSO(int *op)
 int localizar_LSO(char codArt[], int *posicion) //-- DEVUELVE: 1.Exito 0.Fracaso
 {
     int li, ls, testigo;
-    if (cant_LSO > 0)
+    if (cant_LSO != 0)
     {
         li = 0;
-        ls = cant_LSO-1;
-        while (li != ls)
+        ls = cant_LSO;
+        while (li !=ls)
         {
-            testigo = (li + ls +1) / 2;
-            if (strcmp(codArt, LSO[testigo].codigo) >= 0)
+            testigo = (li + ls - 1) / 2;
+            if(strcmp(codArt, LSO[testigo].codigo) <= 0)
             {
-                li = testigo;
+                ls = testigo;
             }
             else
             {
-                ls = testigo - 1;
+                li = testigo + 1;
             }
         }
         *posicion = li;
-        if (strcmp(codArt, LSO[*posicion].codigo) == 0)
+        if(strcmp(codArt, LSO[li].codigo) == 0)
         {
             return 1;
         }
@@ -85,6 +96,32 @@ int localizar_LSO(char codArt[], int *posicion) //-- DEVUELVE: 1.Exito 0.Fracaso
     }
 }
 
+Articulo info_alta_LSO(char codArt[])
+{
+    Articulo nuevo;
+    strcpy(nuevo.codigo, codArt);
+
+    printf("\nArticulo: ");
+    fflush(stdin);
+    fgets(nuevo.articulo, 52, stdin);
+    printf("\nMarca: ");
+    fflush(stdin);
+    fgets(nuevo.marca, 62, stdin);
+    printf("\nValor: ");
+    fflush(stdin);
+    scanf("%f", &nuevo.valor);
+    printf("\nCantidad: ");
+    fflush(stdin);
+    scanf("%i", &nuevo.cantidad);
+    printf("\nClub: ");
+    fflush(stdin);
+    fgets(nuevo.club, 72, stdin);
+
+    borrar_salto(&nuevo);
+
+    return nuevo;
+}
+
 int alta_LSO(Articulo nuevo, int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
 {
     if (cant_LSO < DIM)
@@ -92,31 +129,16 @@ int alta_LSO(Articulo nuevo, int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
         int loc;
         if (localizar_LSO(nuevo.codigo, &loc) == 0)
         {
-            if (cant_LSO != 0)
+            if(entrada == 0)
             {
-                if (strcasecmp(nuevo.codigo, LSO[loc].codigo) > 0)//(x > lista[loc])
-                {
-                    int i;
-                    for(i = cant_LSO; i > loc + 1; i--)
-                    {
-                        LSO[i] = LSO[i-1];
-                    }
-                    LSO[loc + 1] = nuevo;
-                }
-                else
-                {
-                    int i;
-                    for(i = cant_LSO; i > loc; i--)
-                    {
-                        LSO[i] = LSO[i-1];
-                    }
-                    LSO[loc] = nuevo;
-                }
+                nuevo = info_alta_LSO(nuevo.codigo);
             }
-            else
+            int i;
+            for(i = cant_LSO; i >= loc; i--)
             {
-                LSO[loc] = nuevo;
+                LSO[i + 1] = LSO[i];
             }
+            LSO[loc] = nuevo;
             cant_LSO++;
             return 1;
         }

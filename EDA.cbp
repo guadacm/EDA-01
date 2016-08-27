@@ -34,10 +34,10 @@
 		<Unit filename="LSD.h" />
 		<Unit filename="LSO.h" />
 		<Unit filename="LVO.h" />
+		<Unit filename="listas.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="principal.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
