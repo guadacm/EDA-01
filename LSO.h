@@ -88,21 +88,20 @@ void menu_LSO(int *op)
                     printf("Lista Secuencial Ordenada\n");
                     printf("_________________________\n");
                     printf("\n[3] Consultar articulo");
-                    Articulo *consulta;
                     char cod[8];
                     printf("\n\nCodigo: ");
                     fflush(stdin);
                     scanf("%s", cod);
                     strupr(cod);
-                    consulta = consultar_LSO(cod);
-                    if(consulta != NULL)
+                    Articulo consulta = consultar_LSO(cod);
+                    if(strcmp(consulta.codigo, "ZZZZZZ"))
                     {
-                        printf("\n\n Codigo: \t%s", (*consulta).codigo);
-                        printf("\n Articulo: \t%s", (*consulta).articulo);
-                        printf("\n Marca: \t%s", (*consulta).marca);
-                        printf("\n Valor: \t$%.2f", (*consulta).valor);
-                        printf("\n Cantidad: \t%i", (*consulta).cantidad);
-                        printf("\n Club: \t\t%s", (*consulta).club);
+                        printf("\n\n Codigo: \t%s", consulta.codigo);
+                        printf("\n Articulo: \t%s", consulta.articulo);
+                        printf("\n Marca: \t%s", consulta.marca);
+                        printf("\n Valor: \t$%.2f", consulta.valor);
+                        printf("\n Cantidad: \t%i", consulta.cantidad);
+                        printf("\n Club: \t\t%s", consulta.club);
                         printf("\n");
                     }
                     else
@@ -239,9 +238,11 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
 Articulo consultar_LSO(char codArt[8])
 {
     int pos;
+    Articulo aux;
+    strcpy(aux.codigo, "ZZZZZZ");
     if(localizar_LSO(codArt, &pos) == 1)
         return LSO[pos];
     else
-        return NULL;
+        return aux;
 }
 #endif // LSO_H_INCLUDED
