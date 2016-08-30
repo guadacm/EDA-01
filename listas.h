@@ -21,6 +21,7 @@ int localizar_LSD(char codigo[], int *i);
 
 // -- LSO
 int alta_LSO(Articulo nuevo, int entrada);
+int baja_LSO(char codArt[], int entrada);
 
 // -- LVO
 /* FIN PROTOTIPOS */
