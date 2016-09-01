@@ -12,8 +12,9 @@ void menu_LSD(int *op)
         printf("\n[1] Nuevo articulo");
         printf("\n[2] Eliminar articulo");
         printf("\n[3] Consultar articulo");
-        printf("\n[4] Mostrar articulos");
-        printf("\n[5] Memorizacion previa");
+        printf("\n[4] Pertenece");
+        printf("\n[5] Mostrar articulos");
+        printf("\n[6] Memorizacion previa");
         printf("\n\n[0] Volver\n");
         printf("\nElija una opcion: ");
         scanf("%d", op);
@@ -24,44 +25,87 @@ void menu_LSD(int *op)
             break;
 
         case 1:
-            printf("\n Ingrese el codigo del nuevo articulo: ");
-            fflush(stdin);
-            scanf("%s",c);
-            alta_LSD(c,0);
-            system("pause");
-            break;
+                encabezado();
+                printf("Lista Secuencial Desordenada\n");
+                printf("_________________________\n");
+                printf("\n[1] Nuevo articulo");
+                Articulo nuevo;
+                printf("\n\n Codigo: \t");
+                fflush(stdin);
+                scanf("%s", nuevo.codigo);
+                strupr(nuevo.codigo);
+                printf(" Articulo:\t");
+                fflush(stdin);
+                scanf(" %[^\n]",nuevo.articulo);
+                printf(" Marca:\t\t");
+                fflush(stdin);
+                scanf(" %[^\n]",nuevo.marca);
+                printf(" Club:\t\t");
+                fflush(stdin);
+                scanf(" %[^\n]",nuevo.club);
+                printf(" Cantidad:\t");
+                fflush(stdin);
+                scanf("%d",&nuevo.cantidad);
+                printf(" Valor($):\t");
+                fflush(stdin);
+                scanf("%f",&nuevo.valor);
+                if(alta_LSD(nuevo, 0) == 1) printf("\n Enhorabuena tio, El articulo fue agregado con exito\n\n");
+                else printf("\nYa existe ese codigo, ingresaste los datos al pe :( \n\n");
+                system("pause");
+                break;
 
         case 2:
-            printf("Algo\n");
+            encabezado();
+            printf("Lista Secuencial Desordenada\n");
+            printf("_________________________\n");
+            printf("\n[2] Eliminar articulo");
+            printf("\n\n Codigo: \t");
+            fflush(stdin);
+            scanf("%s",c);
+            strupr(c);
+            if(baja_LSD(c,0)==1) printf("\nEl articulo %s fue eliminado con exito\n\n",c);
+            else printf("\nEl articulo %s no fue eliminado o no existe\n\n",c);
             system("pause");
             break;
 
         case 3:
-            printf("\n Ingrese el codigo del articulo a consultar: ");
-            fflush(stdin);
-            scanf("%s",c);
-            if (localizar_LSD(c,&celda) == 1)
-            {
-                printf("\n\t----------ARTICULO CONSULTADO----------\n");
-                printf("\n Codigo: \t%s",LSD[celda].codigo);
-                printf("\n Articulo: \t%s",LSD[celda].articulo);
-                printf("\n Marca: \t%s",LSD[celda].marca);
-                printf("\n Club: \t\t%s",LSD[celda].club);
-                printf("\n Valor: \t$%.2f",LSD[celda].valor);
-                printf("\n Cantidad: \t%d",LSD[celda].cantidad);
-                printf("\n \n");
-            }
-            else printf("\n El articulo con codigo (%s) NO existe\n\n",c);
+            encabezado();
+            printf("Lista Secuencial Desordenada\n");
+            printf("_________________________\n");
+            printf("\n[3] Consultar articulo\n");
+            printf("Algo\n");
             system("pause");
             break;
 
         case 4:
-            //mostrar_LS(LSD);
+            encabezado();
+            printf("Lista Secuencial Desordenada\n");
+            printf("_________________________\n");
+            printf("\n[4] Pertenece\n");
+            printf("\n Ingrese el codigo del articulo a consultar: ");
+            fflush(stdin);
+            scanf("%s",c);
+            strupr(c);
+            if (pertenece_LSD(c) == 1) printf("\n\t El articulo codigo (%s) PERTENECE\n\n",c);
+            else printf("\n\t El articulo codigo (%s) NO PERTENECE\n\n",c);
             system("pause");
             break;
 
         case 5:
-            printf("Algo\n");
+            encabezado();
+            printf("Lista Secuencial Desordenada\n");
+            printf("_________________________\n");
+            printf("\n[5] Mostrar Estructura\n");
+            mostrar_LS(LSD,cant_LSD);
+            system("pause");
+            break;
+
+        case 6:
+            encabezado();
+            printf("Lista Secuencial Desordenada\n");
+            printf("_________________________\n");
+            printf("\n[6] Memorizacion Previa\n");
+            memorizacion_previa(1);
             system("pause");
             break;
         }
@@ -69,117 +113,81 @@ void menu_LSD(int *op)
     *op = -1;
 
 }
-
-void initLS (Articulo LS[])	                 //inicializa la estrucutura LSD ò LSO con "------" en el campo de codigo de cada articulo
-{
-    int i;
-    for(i=0; i<DIM; i++) strcpy(LS[i].codigo,"------");
+int pertenece_LSD (char codigo []){
+    int i=0;
+    while(i<cant_LSD && (strcmp(LSD[i].codigo,codigo)!=0)){i++;}
+    return i<cant_LSD ;
 }
-
-int totalArticulos (Articulo LS[])           // total de articulos dentro de una LSD ò LSO
-{
-    int i;
-    int total=0;
-    for (i=0; i<DIM; i++)
-    {
-        if(strcmp("------",LS[i].codigo) != 0) total++;
-    }
-    return total;
-}
-
-/*void mostrar_LS (Articulo LS[])             // Muestra la lista de articulos para LSD ò LSO
-{
-    int total,i;
-    total=totalArticulos(LS);
-    if(total==0)
-    {
-        printf("\n\tLa lista esta vacia\n");
-        return;
-    }
-    printf("\n\t----------LISTA DE ARTICULOS----------\n");
-    for(i=0; i<total; i++)
-    {
-        printf("\n Codigo: \t%s",LS[i].codigo);
-        printf("\n Articulo: \t%s",LS[i].articulo);
-        printf("\n Marca: \t%s",LS[i].marca);
-        printf("\n Club: \t\t%s",LS[i].club);
-        printf("\n Valor: \t$%.2f",LS[i].valor);
-        printf("\n Cantidad: \t%d",LS[i].cantidad);
-        printf("\n \n");
-    }
-    printf("\n\tTotal de articulos: %d \n\n",total);
-}*/
 
 int localizar_LSD(char codigo[], int *i)            //Localizacion Exitosa=1, noExitosa=0, i=posicion donde esta el elemento o deberia estar
 {
     //char code[8];
-    char vacio[8]= {'-','-','-','-','-','-'};
     //strcpy(code,codigo);
     //strupr(code);
     strupr(codigo);
     (*i)=0;
-    while((*i)<DIM && (strcmp(LSD[*i].codigo,vacio)!=0))
-    {
-        if ( strcmp(LSD[*i].codigo,codigo) == 0) return 1; // localizado
-        else (*i)++;
-
-    }
-    if ((*i)<=DIM ) return 0; //no localizado
+    while((*i)<cant_LSD && (strcmp(LSD[*i].codigo,codigo)!=0)){(*i)++;}
+    return (*i)<cant_LSD ;
+    //if ( strcmp(LSD[*i].codigo,codigo) == 0) return 1; // localizado
+    //else return 0; //no localizado
 }
 
 
-Articulo nuevoArticulo_LSD(char codigo[])
+int alta_LSD(Articulo nuevo, int tipo) 	//int Tipo: (0)Entrada por telcado // (1)entrada por archivo  // return(1)=exito  //return(0)=fracaso
 {
-    Articulo nuevo;
-    strcpy(nuevo.codigo,codigo);
-    printf("\n Ingrese los datos del nuevo articulo:\n\n");
-    printf(" Articulo:\t");
-    fflush(stdin);
-    scanf(" %[^\n]",nuevo.articulo);
-    printf(" Marca:\t\t");
-    fflush(stdin);
-    scanf(" %[^\n]",nuevo.marca);
-    printf(" Club:\t\t");
-    fflush(stdin);
-    scanf(" %[^\n]",nuevo.club);
-    printf(" Cantidad:\t");
-    fflush(stdin);
-    scanf("%d",&nuevo.cantidad);
-    printf(" Valor($):\t");
-    fflush(stdin);
-    scanf("%f",&nuevo.valor);
-    return nuevo;
-}
-
-
-int alta_LSD(char codigo[], int tipo) 	//int Tipo: (0)Entrada por telcado // (1)entrada por archivo  // return(1)=exito  //return(0)=fracaso
-{
-    int celda;
-    //Articulo temp;
-    strupr(codigo);
-    localizar_LSD(codigo,&celda);
-    if (totalArticulos(LSD)==DIM)
+    int celda,exito;
+    exito=localizar_LSD(nuevo.codigo,&celda);
+    //printf("\n exito de localizar=%d - Celda=%d\n",exito,celda);
+    if (cant_LSD==DIM)
     {
-        printf("\nERROR: Estructura Llena.");
+        //printf("\nERROR: Estructura Llena.");
         return 0;
     }
-    if ((strcmp(LSD[celda].codigo,codigo)) != 0)
+    if ( exito == 0)
     {
         if (tipo==0)
         {
-            LSD[celda]=nuevoArticulo_LSD(codigo); //entrada por teclado
+            LSD[celda]=nuevo; //entrada por teclado
         }
         if (tipo==1)
         {
-            // sentencias aun no creadas
+            LSD[celda]=nuevo;
         }
-        printf("\nEl articulo codigo (%s) fue agregado satisfactoriamente!",codigo);
+        cant_LSD+=1;
         return 1;
     }
     else
     {
-        printf("\nERROR: Ya existe un articulo con el mismo codigo (%s).",codigo);
         return 0;
+    }
+
+}
+
+int baja_LSD(char codigo[], int tipo){
+    int celda,exito;
+    char c;
+    strupr(codigo);
+    exito=localizar_LSD(codigo,&celda);
+    if ( exito == 1)
+    {
+        if(tipo == 0)
+                c = confirmacion_baja_LS(LSD[celda]);
+            if(c == 'S' || c == 's' )
+        {
+        if (celda==cant_LSD-1){cant_LSD-=1; return 1;}
+        strcpy(LSD[celda].codigo,LSD[cant_LSD-1].codigo);
+        strcpy(LSD[celda].articulo,LSD[cant_LSD-1].articulo);
+        strcpy(LSD[celda].marca,LSD[cant_LSD-1].marca);
+        strcpy(LSD[celda].club,LSD[cant_LSD-1].club);
+        LSD[celda].cantidad=LSD[cant_LSD-1].cantidad;
+        LSD[celda].valor=LSD[cant_LSD-1].valor;
+        cant_LSD-=1;
+        return 1; // exito dando de baja
+        }
+    }
+    else
+    {
+        return 0; //fracaso dando de baja
     }
 
 }

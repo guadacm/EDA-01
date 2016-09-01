@@ -17,8 +17,9 @@ void menu_LSO(int *op)
         printf("\n[1] Nuevo articulo");
         printf("\n[2] Eliminar articulo");
         printf("\n[3] Consultar articulo");
-        printf("\n[4] Mostrar articulos");
-        printf("\n[5] Memorizacion previa");
+        printf("\n[4] Pertenece");
+        printf("\n[5] Mostrar articulos");
+        printf("\n[6] Memorizacion previa");
         printf("\n\n[0] Volver\n");
         printf("\nElija una opcion: ");
         scanf("%d", op);
@@ -109,11 +110,18 @@ void menu_LSO(int *op)
                     system("pause");
                     break;
                 }
+
             case 4:
+                encabezado();
+                printf("Pertenece\n");
+                system("pause");
+                break;
+
+            case 5:
                 mostrar_LS(LSO, cant_LSO);
                 system("pause");
                 break;
-            case 5:
+            case 6:
                 memorizacion_previa(2);
                 system("pause");
                 break;
@@ -186,22 +194,6 @@ int alta_LSO(Articulo nuevo, int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
     }
 }
 
- char confirmacion_baja_LSO(Articulo baja)
-{
-    char c;
-    //printf("\n Codigo: \t%s",LS[i].codigo);
-    printf("\n Articulo: \t%s", baja.articulo);
-    printf("\n Marca: \t%s", baja.marca);
-    printf("\n Valor: \t$%.2f", baja.valor);
-    printf("\n Cantidad: \t%i", baja.cantidad);
-    printf("\n Club: \t\t%s", baja.club);
-
-    printf("\n\nEsta seguro que quiere eliminar este articulo? S/N: ");
-    fflush(stdin);
-    scanf("%c", &c);
-    //strupr(&c);
-    return c;
-}
 
 int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
 {
@@ -212,7 +204,7 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
         if(localizar_LSO(codArt, &loc) == 1)
         {
             if(entrada == 0)
-                c = confirmacion_baja_LSO(LSO[loc]);
+                c = confirmacion_baja_LS(LSO[loc]);
             if(c == 'S' || c == 's' )
             {
                 int i;
