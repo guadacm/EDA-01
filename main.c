@@ -79,7 +79,6 @@ void principal()
 
 int main()
 {
-    initLS(LSD);
 
 // -- MENU PRINCIPAL
     while (opcion != 0)

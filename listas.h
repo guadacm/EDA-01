@@ -17,7 +17,7 @@ void borrar_salto(Articulo *art);
 
 // -- LSD
 int localizar_LSD(char codigo[], int *i);
-int localizar_LSD(char codigo[], int *i);
+
 
 // -- LSO
 int alta_LSO(Articulo nuevo, int entrada);
@@ -42,6 +42,16 @@ int cant_LSO;
 // -- LVO
 /* FIN VARIABLES */
 
+void imprimirArt(Articulo Art){
+        printf("\n Codigo: \t%s",Art.codigo);
+        printf("\n Articulo: \t%s",Art.articulo);
+        printf("\n Marca: \t%s",Art.marca);
+        printf("\n Valor: \t$%.2f",Art.valor);
+        printf("\n Cantidad: \t%i",Art.cantidad);
+        printf("\n Club: \t\t%s",Art.club);
+        printf("\n");
+}
+
 void mostrar_LS (Articulo LS[], int cant)             // Muestra la lista de articulos para LSD ò LSO
 {
     int i;
@@ -55,13 +65,7 @@ void mostrar_LS (Articulo LS[], int cant)             // Muestra la lista de art
         printf("\n\t----------LISTA DE ARTICULOS----------\n");
         for(i = 0; i < cant; i++)
         {
-            printf("\n Codigo: \t%s",LS[i].codigo);
-            printf("\n Articulo: \t%s",LS[i].articulo);
-            printf("\n Marca: \t%s",LS[i].marca);
-            printf("\n Valor: \t$%.2f",LS[i].valor);
-            printf("\n Cantidad: \t%i",LS[i].cantidad);
-            printf("\n Club: \t\t%s",LS[i].club);
-            printf("\n");
+            imprimirArt(LS[i]);
         }
         printf("\n\tTotal de articulos: %d \n\n",cant);
     }
@@ -86,12 +90,12 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
             fscanf(fp, "%f\n", &nuevo.valor);
             fscanf(fp, "%i\n", &nuevo.cantidad);
             fgets(nuevo.club, 72, fp);
-
             borrar_salto(&nuevo);
 
             switch(lista)
             {
                 case 1:
+                    alta_LSD(nuevo, 1);
                     break;
                 case 2:
                     alta_LSO(nuevo, 1);
@@ -104,6 +108,23 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
         printf("La memorizacion se ha llevado a cabo\n");
     }
     fclose(fp);
+}
+
+ char confirmacion_baja_LS(Articulo baja)
+{
+    char c;
+    //printf("\n Codigo: \t%s",LS[i].codigo);
+    printf("\n Articulo: \t%s", baja.articulo);
+    printf("\n Marca: \t%s", baja.marca);
+    printf("\n Valor: \t$%.2f", baja.valor);
+    printf("\n Cantidad: \t%i", baja.cantidad);
+    printf("\n Club: \t\t%s", baja.club);
+
+    printf("\n\nEsta seguro que quiere eliminar este articulo? S/N: ");
+    fflush(stdin);
+    scanf("%c", &c);
+    //strupr(&c);
+    return c;
 }
 
 void borrar_salto(Articulo *art) {//Borra en '\n' que almacena fgets.
