@@ -17,7 +17,7 @@ void borrar_salto(Articulo *art);
 
 // -- LSD
 int localizar_LSD(char codigo[], int *i);
-
+Articulo evocar_LSD (char codigo[],int *exito);
 
 // -- LSO
 int alta_LSO(Articulo nuevo, int entrada);
@@ -27,13 +27,11 @@ Articulo consultar_LSO(char codArt[8]);
 // -- LVO
 /* FIN PROTOTIPOS */
 
+
 /* VARIABLES */
 // -- LSD
-Articulo temp;
 Articulo LSD[DIM];
 int cant_LSD = 0;
-char c[8];
-int celda;
 
 // -- LSO
 Articulo LSO[DIM];
