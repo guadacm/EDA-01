@@ -1,38 +1,35 @@
 /* Funciones para Lista Secuencial Ordenada */
 #ifndef LSO_H_INCLUDED
 #define LSO_H_INCLUDED
-/*hgvh */
-
 
 void menu_LSO(int *op)
 {
     cant_LSO = 0; // -- Inicializo la lista
-    strcpy(LSO[0].codigo, "ZZZZZZ");
+    strcpy(LSO[0].codigo, "ZZZZZZ"); // -- +inf
 
     while (*op != 0)
     {
         encabezado();
-        printf("Lista Secuencial Ordenada\n");
-        printf("_____________________________\n");
-        printf("\n[1] Nuevo articulo");
-        printf("\n[2] Eliminar articulo");
-        printf("\n[3] Consultar articulo");
-        printf("\n[4] Pertenece");
-        printf("\n[5] Mostrar articulos");
-        printf("\n[6] Memorizacion previa");
-        printf("\n\n[0] Volver\n");
-        printf("\nElija una opcion: ");
+        printf("Lista Secuencial Ordenada\n"
+               "-------------------------\n"
+               "\n[1] Nuevo articulo"
+               "\n[2] Eliminar articulo"
+               "\n[3] Consultar articulo"
+               "\n[5] Mostrar articulos"
+               "\n[6] Memorizacion previa"
+               "\n\n[0] Volver\n"
+               "\nElija una opcion: ");
         scanf("%d", op);
 
         switch (*op)
         {
             case 0: break;
-            case 1:
+            case 1: // -- Nuevo articulo
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n");
-                    printf("_________________________\n");
-                    printf("\n[1] Nuevo articulo");
+                    printf("Lista Secuencial Ordenada\n"
+                           "-------------------------\n"
+                           "\n[1] Nuevo articulo");
                     Articulo nuevo;
                     int alta;
                     printf("\n\nCodigo: ");
@@ -63,12 +60,12 @@ void menu_LSO(int *op)
                     system("pause");
                     break;
                 }
-            case 2:
+            case 2: // -- Eliminar articulo
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n");
-                    printf("_________________________\n");
-                    printf("\n[2] Eliminar articulo");
+                    printf("Lista Secuencial Ordenada\n"
+                           "-------------------------\n"
+                           "\n[2] Eliminar articulo");
                     char cod[8];
                     int baja;
                     printf("\n\nCodigo: ");
@@ -83,12 +80,12 @@ void menu_LSO(int *op)
                     system("pause");
                     break;
                 }
-            case 3:
+            case 3: // -- Consultar articulo
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n");
-                    printf("_________________________\n");
-                    printf("\n[3] Consultar articulo");
+                    printf("Lista Secuencial Ordenada\n"
+                           "-------------------------\n"
+                           "\n[3] Consultar articulo");
                     char cod[8];
                     printf("\n\nCodigo: ");
                     fflush(stdin);
@@ -97,34 +94,52 @@ void menu_LSO(int *op)
                     Articulo consulta = consultar_LSO(cod);
                     if(strcmp(consulta.codigo, "ZZZZZZ"))
                     {
-                        printf("\n\n Codigo: \t%s", consulta.codigo);
-                        printf("\n Articulo: \t%s", consulta.articulo);
-                        printf("\n Marca: \t%s", consulta.marca);
-                        printf("\n Valor: \t$%.2f", consulta.valor);
-                        printf("\n Cantidad: \t%i", consulta.cantidad);
-                        printf("\n Club: \t\t%s", consulta.club);
-                        printf("\n");
+                        printf("\n\n Codigo: \t%s\n Articulo: \t%s\n Marca: \t%s\n Valor: \t$%.2f\n Cantidad: \t%i\n Club: \t\t%s\n\n",
+                               consulta.codigo, consulta.articulo, consulta.marca, consulta.valor, consulta.cantidad, consulta.club);
                     }
                     else
                         printf("\n\nEl articulo no existe\n\n");
                     system("pause");
                     break;
                 }
+            case 4: // -- Articulo entregado a club
+                {
+                    encabezado();
+                    printf("Lista Secuencial Ordenada\n"
+                           "-------------------------\n"
+                           "\n[4] Articulo entregado a club");
+                    char cod[8];
+                    printf("\n\nCodigo: ");
+                    fflush(stdin);
+                    scanf("%s", cod);
+                    strupr(cod);
+                    int pos;
+                    if ((localizar_LSO(cod, &pos) == 1) && (strcmp(LSO[pos].codigo, "ZZZZZZ") != 0))
+                        printf("\nArticulo entregado a club\n\n");
+                    else
+                        printf("\nArticulo NO entregado a club\n\n");
 
-            case 4:
-                encabezado();
-                printf("Pertenece\n");
-                system("pause");
-                break;
-
-            case 5:
-                mostrar_LS(LSO, cant_LSO);
-                system("pause");
-                break;
-            case 6:
-                memorizacion_previa(2);
-                system("pause");
-                break;
+                    system("pause");
+                    break;
+                }
+            case 5: // -- Mostrar articulos
+                {
+                    encabezado();
+                    printf("Lista Secuencial Ordenada\n"
+                           "-------------------------\n");
+                    mostrar_LS(LSO, cant_LSO);
+                    system("pause");
+                    break;
+                }
+            case 6: // -- Memorizacion previa
+                {
+                    encabezado();
+                    printf("Lista Secuencial Ordenada\n"
+                           "-------------------------\n");
+                    memorizacion_previa(2);
+                    system("pause");
+                    break;
+                }
         }
     }
     *op = -1;
@@ -193,7 +208,6 @@ int alta_LSO(Articulo nuevo, int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
         return 0;
     }
 }
-
 
 int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
 {

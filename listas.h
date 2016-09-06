@@ -76,7 +76,7 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
     FILE *fp;
 
     if ((fp = fopen("PruebaArticulos.txt", "r")) == NULL)
-        printf("ERROR: no se pudo abrir el archivo\n");
+        printf("\n\nERROR: no se pudo abrir el archivo\n\n");
     else
     {
         while(!(feof(fp)))
@@ -103,7 +103,7 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
 
             }
         }
-        printf("La memorizacion se ha llevado a cabo\n");
+        printf("\n\nLa memorizacion se ha llevado a cabo\n\n");
     }
     fclose(fp);
 }

@@ -1,0 +1,10 @@
+-- listas.h:
+* Se encuentran definiciones de constantes, variables y estructuras.
+* Tambien estan las funciones comunes a las listas.
+
+-- LSD.h
+
+-- LSO.h
+* Usamos un +infinito al final de la lista para el correcto funcionamiento de la busqueda binaria
+
+-- LVO.h
