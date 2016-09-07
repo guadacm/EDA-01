@@ -1,6 +1,12 @@
-/*
+/* -- Grupo 5: Medina, Guadalupe
+ *             Montenegro, Luis
  *
+ * -- Estructura elegida:
  *
+ * -- Funciones de costos:
+ *                        - Alta y Baja -> Cantidad de corrimientos para LSD y LSO
+ *                                      -> Actualizacion de puntero para LVO
+ *                        - Pertenencia -> Cantidad de celdas consultadas para todas las listas
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,9 +21,9 @@ int opcion = -1;
 void encabezado()
 {
     system("cls");
-    printf("\n\t****************************************\n");
-    printf("\t*** ESTRUCTURA DE DATOS Y ALGORITMOS ***\n");
-    printf("\t****************************************\n\n");
+    printf("\n\t****************************************\n"
+             "\t*** ESTRUCTURA DE DATOS Y ALGORITMOS ***\n"
+             "\t****************************************\n");
 }
 
 // -- MENU ADMINISTRACION
@@ -48,16 +54,49 @@ void administracion()
 // -- MENU COMPARACION
 void comparacion()
 {
-    encabezado();
-    printf("Comparacion de estructuras\n");
-    printf("_____________________________\n");
-    printf("\n[1] ");
-    printf("\n[2] ");
-    printf("\n[3] ");
-    printf("\n\n[0] Volver\n");
-    printf("\nElija una opcion: ");
-    scanf("%d", &opcion);
+    /* Inicializacion de Estructuras y variables */
+    // -- LSD
 
+    // -- LSO
+    cant_LSO = 0;
+    strcpy(LSO[0].codigo, "ZZZZZZ"); // -- +inf
+    cant_altas_LSO = 0;
+    cant_bajas_LSO = 0;
+    cant_pertenencia_LSO = 0;
+    // -- LVO
+    /* Fin inicializacion */
+
+    encabezado();
+    printf("\t       Comparacion de estructuras       \n"
+           "\t       --------------------------       \n");
+    lectura_archivo_operaciones();
+
+    encabezado();
+    printf("\t       Comparacion de estructuras       \n"
+           "\t       --------------------------       \n"
+           "\nCant. de Altas:\tLSD: 0\tLSO: 0\tLVO: 0"
+           "\nCant. de Bajas:\tLSD: 0\tLSO: 0\tLVO: 0"
+           "\nCant. de Pertenencia:\tLSD: 0\tLSO: 0\tLVO: 0\n");
+    printf("\nCostos de Altas"
+           "\n---------------"
+           "\n\tMEDIOS:\t\tMAXIMOS:"
+           "\nLSD:\t0\t\t0"
+           "\nLSO:\t0\t\t0"
+           "\nLVO:\t0\t\t0");
+    printf("\n\nCostos de Bajas"
+             "\n---------------"
+           "\n\tMEDIOS:\t\tMAXIMOS:"
+           "\nLSD:\t0\t\t0"
+           "\nLSO:\t0\t\t0"
+           "\nLVO:\t0\t\t0");
+
+    printf("\n\nCostos de Pertenencia"
+             "\n---------------------"
+           "\n\tMEDIOS:\t\tMAXIMOS:"
+           "\nLSD:\t0\t\t0"
+           "\nLSO:\t0\t\t0"
+           "\nLVO:\t0\t\t0\n\n");
+    system("pause");
 }
 
 // -- MENU PRINCIPAL

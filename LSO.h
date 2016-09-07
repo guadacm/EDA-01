@@ -52,7 +52,7 @@ void menu_LSO(int *op)
                     fflush(stdin);
                     fgets(nuevo.club, 72, stdin);
                     borrar_salto(&nuevo);
-                    alta = alta_LSO(nuevo, 0);
+                    alta = alta_LSO(nuevo);
                     if(alta == 0)
                         printf("\nEl articulo ya existe\n\n");
                     else
@@ -94,8 +94,8 @@ void menu_LSO(int *op)
                     Articulo consulta = consultar_LSO(cod);
                     if(strcmp(consulta.codigo, "ZZZZZZ"))
                     {
-                        printf("\n\n Codigo: \t%s\n Articulo: \t%s\n Marca: \t%s\n Valor: \t$%.2f\n Cantidad: \t%i\n Club: \t\t%s\n\n",
-                               consulta.codigo, consulta.articulo, consulta.marca, consulta.valor, consulta.cantidad, consulta.club);
+                        imprimirArt(consulta);
+                        printf("\n");
                     }
                     else
                         printf("\n\nEl articulo no existe\n\n");
@@ -182,7 +182,7 @@ int localizar_LSO(char codArt[], int *posicion) //-- DEVUELVE: 1.Exito 0.Fracaso
     }
 }
 
-int alta_LSO(Articulo nuevo, int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
+int alta_LSO(Articulo nuevo) //-- DEVUELVE: 1.Exito 0.Fracaso.
 {
     if (cant_LSO < DIM)
     {

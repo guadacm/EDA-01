@@ -32,4 +32,34 @@ void menu_LVO(int *op)
 
 }
 
+int localizar_LVO(char codArt[], Nodo *posicion) //-- DEVUELVE: 1.Exito 0.Fracaso
+{
+    if (cant_LVO >0)
+    {
+        Nodo *aux = LVO;
+        Nodo *aux1 = LVO;
+        while ((aux != NULL) && (strcmp(aux->dato.codigo, codArt) < 0))
+        {
+            aux1 = aux;
+            aux = aux->next;
+        }
+        posicion = aux1;
+        if(aux == NULL)
+            return 0;
+        else
+        {
+            if(strcmp(aux->dato.codigo, codArt) == 0)
+                return 1;
+            else
+                return 0;
+        }
+    }
+    else
+    {
+        posicion = LVO;
+        return 0;
+    }
+
+}
+
 #endif // LVO_H_INCLUDED

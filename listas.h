@@ -11,6 +11,12 @@ typedef struct Articulo
 	char club[72];
 } Articulo;
 
+typedef struct nodo
+{
+    Articulo dato;
+    struct nodo *next;
+} Nodo;
+
 /* PROTOTIPOS */
 void encabezado();
 void borrar_salto(Articulo *art);
@@ -20,11 +26,13 @@ int localizar_LSD(char codigo[], int *i);
 Articulo evocar_LSD (char codigo[],int *exito);
 
 // -- LSO
-int alta_LSO(Articulo nuevo, int entrada);
+int alta_LSO(Articulo nuevo);
 int baja_LSO(char codArt[], int entrada);
+int localizar_LSO(char codArt[], int *posicion);
 Articulo consultar_LSO(char codArt[8]);
 
 // -- LVO
+int localizar_LVO(char codArt[], Nodo *posicion);
 /* FIN PROTOTIPOS */
 
 
@@ -36,18 +44,17 @@ int cant_LSD = 0;
 // -- LSO
 Articulo LSO[DIM];
 int cant_LSO;
+int cant_altas_LSO, cant_bajas_LSO, cant_pertenencia_LSO;
 
 // -- LVO
+Nodo *LVO; // Apunta al primer nodo de la lista
+int cant_LVO;
 /* FIN VARIABLES */
 
-void imprimirArt(Articulo Art){
-        printf("\n Codigo: \t%s",Art.codigo);
-        printf("\n Articulo: \t%s",Art.articulo);
-        printf("\n Marca: \t%s",Art.marca);
-        printf("\n Valor: \t$%.2f",Art.valor);
-        printf("\n Cantidad: \t%i",Art.cantidad);
-        printf("\n Club: \t\t%s",Art.club);
-        printf("\n");
+void imprimirArt(Articulo Art)
+{
+    printf("\n Codigo: \t%s\n Articulo: \t%s\n Marca: \t%s\n Valor: \t$%.2f\n Cantidad: \t%i\n Club: \t\t%s\n",
+            Art.codigo, Art.articulo, Art.marca, Art.valor ,Art.cantidad ,Art.club);
 }
 
 void mostrar_LS (Articulo LS[], int cant)             // Muestra la lista de articulos para LSD ò LSO
@@ -96,7 +103,7 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
                     alta_LSD(nuevo, 1);
                     break;
                 case 2:
-                    alta_LSO(nuevo, 1);
+                    alta_LSO(nuevo);
                     break;
                 case 3:
                     break;
@@ -125,7 +132,8 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
     return c;
 }
 
-void borrar_salto(Articulo *art) {//Borra en '\n' que almacena fgets.
+void borrar_salto(Articulo *art) //Borra en '\n' que almacena fgets.
+{
     int i = 0;
     for (i = 0; i < 8; i++) { //Codigo
         if ((*art).codigo[i] == '\n') {
@@ -147,5 +155,53 @@ void borrar_salto(Articulo *art) {//Borra en '\n' que almacena fgets.
             (*art).club[i] = '\0';
         }
     }
+}
+
+void lectura_archivo_operaciones()
+{
+    int cod_op;
+    Articulo nuevo;
+    FILE *fp;
+    if((fp = fopen("Operaciones.txt", "r")) == NULL)
+        printf("\n\nERROR: No se pudo abrir el archivo\n\n");
+    else
+    {
+        while (!(feof(fp)))
+        {
+            fscanf(fp, "%d", &cod_op);
+            if ((cod_op == 1) || (cod_op == 2)) // -- (1. Alta) (2. Baja)
+            {
+                fgets(nuevo.codigo, 8, fp);
+                fgets(nuevo.articulo, 52, fp);
+                fgets(nuevo.marca, 62, fp);
+                fscanf(fp, "%f\n", &nuevo.valor);
+                fscanf(fp, "%i\n", &nuevo.cantidad);
+                fgets(nuevo.club, 72, fp);
+            }
+            else
+            {
+                fgets(nuevo.codigo, 8, fp);
+            }
+            strupr(nuevo.codigo);
+            borrar_salto(&nuevo);
+
+            switch(cod_op)
+            {
+                case 1:
+                    alta_LSD(nuevo, 1);
+                    alta_LSO(nuevo);
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    break;
+
+            }
+        }
+        printf("\n\nLa secuencia de operaciones ha finalizado\n\n");
+        fclose(fp);
+    }
+    system("pause");
 }
 #endif // LISTAS_H_INCLUDED

@@ -31,6 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="LEEME.txt" />
 		<Unit filename="LSD.h" />
 		<Unit filename="LSO.h" />
 		<Unit filename="LVO.h" />
