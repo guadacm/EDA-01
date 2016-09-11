@@ -5,6 +5,8 @@
 -- LSD.h
 
 -- LSO.h
-* Usamos un +infinito al final de la lista para el correcto funcionamiento de la busqueda binaria
+* Al final de la lista usamos un Articulo con codigo "ZZZZZZ" para el correcto funcionamiento de la busqueda binaria
 
 -- LVO.h
+* Como inicio de la lista usamos un nodo que en el campo dato tiene codigo "000000" y el campo next apunta al primer articulo de
+  la lista o a null si esta vacia.

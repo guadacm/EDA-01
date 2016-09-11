@@ -15,6 +15,7 @@ void menu_LSO(int *op)
                "\n[1] Nuevo articulo"
                "\n[2] Eliminar articulo"
                "\n[3] Consultar articulo"
+               "\n[4] Articulo entregado a club"
                "\n[5] Mostrar articulos"
                "\n[6] Memorizacion previa"
                "\n\n[0] Volver\n"
@@ -91,7 +92,7 @@ void menu_LSO(int *op)
                     fflush(stdin);
                     scanf("%s", cod);
                     strupr(cod);
-                    Articulo consulta = consultar_LSO(cod);
+                    Articulo consulta = evocar_LSO(cod);
                     if(strcmp(consulta.codigo, "ZZZZZZ"))
                     {
                         imprimirArt(consulta);
@@ -113,8 +114,7 @@ void menu_LSO(int *op)
                     fflush(stdin);
                     scanf("%s", cod);
                     strupr(cod);
-                    int pos;
-                    if ((localizar_LSO(cod, &pos) == 1) && (strcmp(LSO[pos].codigo, "ZZZZZZ") != 0))
+                    if (pertenece_LSO(cod) == 1)
                         printf("\nArticulo entregado a club\n\n");
                     else
                         printf("\nArticulo NO entregado a club\n\n");
@@ -196,6 +196,7 @@ int alta_LSO(Articulo nuevo) //-- DEVUELVE: 1.Exito 0.Fracaso.
             }
             LSO[loc] = nuevo;
             cant_LSO++;
+            cant_altas_LSO++;
             return 1;
         }
         else
@@ -204,9 +205,7 @@ int alta_LSO(Articulo nuevo) //-- DEVUELVE: 1.Exito 0.Fracaso.
         }
     }
     else
-    {
         return 0;
-    }
 }
 
 int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
@@ -218,7 +217,7 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
         if(localizar_LSO(codArt, &loc) == 1)
         {
             if(entrada == 0)
-                c = confirmacion_baja_LS(LSO[loc]);
+                c = confirmacion_baja(LSO[loc]);
             if(c == 'S' || c == 's' )
             {
                 int i;
@@ -227,6 +226,7 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
                     LSO[i] = LSO[i + 1];
                 }
                 cant_LSO--;
+                cant_bajas_LSO++;
                 return 1;
             }
             else
@@ -241,14 +241,32 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
         return 0;
 }
 
-Articulo consultar_LSO(char codArt[8])
+int pertenece_LSO(char codArt[])
 {
-    int pos;
+    int loc;
+    int per = localizar_LSO(codArt, &loc) && (strcmp(LSO[loc].codigo, "ZZZZZZ") != 0);
+    if (per == 1)
+    {
+        cant_pertenece_exito_LSO++;
+        return 1;
+    }
+    else
+    {
+        cant_pertenece_fracaso_LSO++;
+        return 0;
+    }
+
+}
+
+Articulo evocar_LSO(char codArt[])
+{
+    int loc;
     Articulo aux;
     strcpy(aux.codigo, "ZZZZZZ");
-    if(localizar_LSO(codArt, &pos) == 1)
-        return LSO[pos];
+    if(localizar_LSO(codArt, &loc) == 1)
+        return LSO[loc];
     else
         return aux;
 }
+
 #endif // LSO_H_INCLUDED

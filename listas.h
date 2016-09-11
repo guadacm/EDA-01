@@ -26,13 +26,19 @@ int localizar_LSD(char codigo[], int *i);
 Articulo evocar_LSD (char codigo[],int *exito);
 
 // -- LSO
+int localizar_LSO(char codArt[], int *posicion);
 int alta_LSO(Articulo nuevo);
 int baja_LSO(char codArt[], int entrada);
-int localizar_LSO(char codArt[], int *posicion);
-Articulo consultar_LSO(char codArt[8]);
+int pertenece_LSO(char codArt[]);
+Articulo evocar_LSO(char codArt[]);
 
 // -- LVO
-int localizar_LVO(char codArt[], Nodo *posicion);
+int localizar_LVO(char codArt[], Nodo **posicion);
+int alta_LVO(Articulo nuevo);
+int baja_LVO(char codArt[], int entrada);
+int pertenece_LVO(char codArt[]);
+Articulo evocar_LVO(char codArt[]);
+void mostrar_LVO();
 /* FIN PROTOTIPOS */
 
 
@@ -44,33 +50,53 @@ int cant_LSD = 0;
 // -- LSO
 Articulo LSO[DIM];
 int cant_LSO;
-int cant_altas_LSO, cant_bajas_LSO, cant_pertenencia_LSO;
+int cant_altas_LSO;
+int cant_bajas_LSO;
+int cant_pertenece_exito_LSO, cant_pertenece_fracaso_LSO;
 
 // -- LVO
-Nodo *LVO; // Apunta al primer nodo de la lista
+Nodo LVO; // Apunta al primer nodo de la lista
 int cant_LVO;
+int cant_altas_LVO;
+int cant_bajas_LVO;
+int cant_pertenece_exito_LVO, cant_pertenece_fracaso_LVO;
 /* FIN VARIABLES */
 
 void imprimirArt(Articulo Art)
 {
-    printf("\n Codigo: \t%s\n Articulo: \t%s\n Marca: \t%s\n Valor: \t$%.2f\n Cantidad: \t%i\n Club: \t\t%s\n",
-            Art.codigo, Art.articulo, Art.marca, Art.valor ,Art.cantidad ,Art.club);
+    printf("\n Codigo: \t%s"
+           "\n Articulo: \t%s"
+           "\n Marca: \t%s"
+           "\n Valor: \t$%.2f"
+           "\n Cantidad: \t%i"
+           "\n Club: \t\t%s\n",
+            Art.codigo,
+            Art.articulo,
+            Art.marca,
+            Art.valor,
+            Art.cantidad,
+            Art.club);
 }
 
 void mostrar_LS (Articulo LS[], int cant)             // Muestra la lista de articulos para LSD ò LSO
 {
-    int i;
     if(cant == 0)
     {
-        printf("\n\tLa lista esta vacia\n");
-        return;
+        printf("\n\tLa lista esta vacia\n\n");
     }
     else
     {
+        int i, j = 1;
         printf("\n\t----------LISTA DE ARTICULOS----------\n");
         for(i = 0; i < cant; i++)
         {
             imprimirArt(LS[i]);
+            if ((j % 5) == 0)
+            {
+                printf("\n");
+                system("pause");
+            }
+            j++;
         }
         printf("\n\tTotal de articulos: %d \n\n",cant);
     }
@@ -106,6 +132,7 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
                     alta_LSO(nuevo);
                     break;
                 case 3:
+                    alta_LVO(nuevo);
                     break;
 
             }
@@ -115,10 +142,10 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
     fclose(fp);
 }
 
- char confirmacion_baja_LS(Articulo baja)
+char confirmacion_baja(Articulo baja)
 {
     char c;
-    //printf("\n Codigo: \t%s",LS[i].codigo);
+    printf("\n Codigo: \t%s", baja.codigo);
     printf("\n Articulo: \t%s", baja.articulo);
     printf("\n Marca: \t%s", baja.marca);
     printf("\n Valor: \t$%.2f", baja.valor);
@@ -128,7 +155,6 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
     printf("\n\nEsta seguro que quiere eliminar este articulo? S/N: ");
     fflush(stdin);
     scanf("%c", &c);
-    //strupr(&c);
     return c;
 }
 
@@ -168,7 +194,7 @@ void lectura_archivo_operaciones()
     {
         while (!(feof(fp)))
         {
-            fscanf(fp, "%d", &cod_op);
+            fscanf(fp, "%d\n", &cod_op);
             if ((cod_op == 1) || (cod_op == 2)) // -- (1. Alta) (2. Baja)
             {
                 fgets(nuevo.codigo, 8, fp);
@@ -179,9 +205,8 @@ void lectura_archivo_operaciones()
                 fgets(nuevo.club, 72, fp);
             }
             else
-            {
                 fgets(nuevo.codigo, 8, fp);
-            }
+
             strupr(nuevo.codigo);
             borrar_salto(&nuevo);
 

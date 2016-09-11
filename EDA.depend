@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1473201441 source:c:\users\guada\desktop\pm\eda\main.c
+1473539211 source:c:\users\guada\desktop\pm\eda\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -10,13 +10,13 @@
 
 1471720455 c:\users\guada\desktop\pm\eda\menus.h
 
-1473140208 c:\users\guada\desktop\pm\eda\lsd.h
+1473551720 c:\users\guada\desktop\pm\eda\lsd.h
 
-1473210937 c:\users\guada\desktop\pm\eda\lso.h
+1473553664 c:\users\guada\desktop\pm\eda\lso.h
 
-1473210758 c:\users\guada\desktop\pm\eda\lvo.h
+1473554310 c:\users\guada\desktop\pm\eda\lvo.h
 
 1471997605 c:\users\guada\desktop\pm\eda\principal.h
 
-1473210937 c:\users\guada\desktop\pm\eda\listas.h
+1473554430 c:\users\guada\desktop\pm\eda\listas.h
 

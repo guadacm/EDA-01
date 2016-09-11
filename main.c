@@ -62,7 +62,9 @@ void comparacion()
     strcpy(LSO[0].codigo, "ZZZZZZ"); // -- +inf
     cant_altas_LSO = 0;
     cant_bajas_LSO = 0;
-    cant_pertenencia_LSO = 0;
+    cant_pertenece_exito_LSO = 0;
+    cant_pertenece_fracaso_LSO = 0;
+
     // -- LVO
     /* Fin inicializacion */
 
@@ -74,9 +76,14 @@ void comparacion()
     encabezado();
     printf("\t       Comparacion de estructuras       \n"
            "\t       --------------------------       \n"
-           "\nCant. de Altas:\tLSD: 0\tLSO: 0\tLVO: 0"
-           "\nCant. de Bajas:\tLSD: 0\tLSO: 0\tLVO: 0"
-           "\nCant. de Pertenencia:\tLSD: 0\tLSO: 0\tLVO: 0\n");
+           "\nCant. de Altas:\tLSD: 0\tLSO: %d\tLVO: 0"
+           "\nCant. de Bajas:\tLSD: 0\tLSO: %d\tLVO: 0"
+           "\nCant. de Pertenece-Exito:\tLSD: 0\tLSO: %d\tLVO: 0\n"
+           "\nCant. de Pertenece-Fracaso:\tLSD: 0\tLSO: %d\tLVO: 0\n",
+           cant_altas_LSO,
+           cant_bajas_LSO,
+           cant_pertenece_exito_LSO,
+           cant_pertenece_fracaso_LSO);
     printf("\nCostos de Altas"
            "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"

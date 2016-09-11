@@ -191,7 +191,7 @@ int baja_LSD(char codigo[], int tipo)
     if ( exito == 1)
     {
         if(tipo == 0)
-            c = confirmacion_baja_LS(LSD[celda]);
+            c = confirmacion_baja(LSD[celda]);
         if(c == 'S' || c == 's' )
         {
             if (celda==cant_LSD-1)
