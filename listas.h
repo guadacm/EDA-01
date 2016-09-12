@@ -45,21 +45,24 @@ void mostrar_LVO();
 /* VARIABLES */
 // -- LSD
 Articulo LSD[DIM];
-int cant_LSD = 0;
+int cant_LSD;
+int cant_altas_LSD;
+int cant_bajas_LSD;
+int cant_consultas_exito_LSD, cant_consultas_fracaso_LSD;
 
 // -- LSO
 Articulo LSO[DIM];
 int cant_LSO;
 int cant_altas_LSO;
 int cant_bajas_LSO;
-int cant_pertenece_exito_LSO, cant_pertenece_fracaso_LSO;
+int cant_consultas_exito_LSO, cant_consultas_fracaso_LSO;
 
 // -- LVO
 Nodo LVO; // Apunta al primer nodo de la lista
 int cant_LVO;
 int cant_altas_LVO;
 int cant_bajas_LVO;
-int cant_pertenece_exito_LVO, cant_pertenece_fracaso_LVO;
+int cant_consultas_exito_LVO, cant_consultas_fracaso_LVO;
 /* FIN VARIABLES */
 
 void imprimirArt(Articulo Art)
@@ -126,7 +129,7 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
             switch(lista)
             {
                 case 1:
-                    alta_LSD(nuevo, 1);
+                    alta_LSD(nuevo);
                     break;
                 case 2:
                     alta_LSO(nuevo);
@@ -185,7 +188,7 @@ void borrar_salto(Articulo *art) //Borra en '\n' que almacena fgets.
 
 void lectura_archivo_operaciones()
 {
-    int cod_op;
+    int cod_op,auxiliar;
     Articulo nuevo;
     FILE *fp;
     if((fp = fopen("Operaciones.txt", "r")) == NULL)
@@ -213,13 +216,19 @@ void lectura_archivo_operaciones()
             switch(cod_op)
             {
                 case 1:
-                    alta_LSD(nuevo, 1);
+                    alta_LSD(nuevo);
                     alta_LSO(nuevo);
+                    alta_LVO(nuevo);
                     break;
                 case 2:
-
+                    baja_LSD(nuevo.codigo,1);
+                    baja_LSO(nuevo.codigo,1);
+                    baja_LVO(nuevo.codigo,1);
                     break;
                 case 3:
+                    evocar_LSD(nuevo.codigo,&auxiliar);
+                    pertenece_LSO(nuevo.codigo);
+                    pertenece_LVO(nuevo.codigo);
                     break;
 
             }

@@ -56,16 +56,25 @@ void comparacion()
 {
     /* Inicializacion de Estructuras y variables */
     // -- LSD
+    cant_LSD = 0;
+    cant_altas_LSD = 0;
+    cant_bajas_LSD = 0;
+    cant_consultas_exito_LSD = 0;
+    cant_consultas_fracaso_LSD = 0;
 
     // -- LSO
     cant_LSO = 0;
     strcpy(LSO[0].codigo, "ZZZZZZ"); // -- +inf
     cant_altas_LSO = 0;
     cant_bajas_LSO = 0;
-    cant_pertenece_exito_LSO = 0;
-    cant_pertenece_fracaso_LSO = 0;
+    cant_consultas_exito_LSO = 0;
+    cant_consultas_fracaso_LSO = 0;
 
     // -- LVO
+    cant_altas_LVO = 0;
+    cant_bajas_LVO = 0;
+    cant_consultas_exito_LVO = 0;
+    cant_consultas_fracaso_LVO = 0;
     /* Fin inicializacion */
 
     encabezado();
@@ -76,14 +85,22 @@ void comparacion()
     encabezado();
     printf("\t       Comparacion de estructuras       \n"
            "\t       --------------------------       \n"
-           "\nCant. de Altas:\tLSD: 0\tLSO: %d\tLVO: 0"
-           "\nCant. de Bajas:\tLSD: 0\tLSO: %d\tLVO: 0"
-           "\nCant. de Pertenece-Exito:\tLSD: 0\tLSO: %d\tLVO: 0\n"
-           "\nCant. de Pertenece-Fracaso:\tLSD: 0\tLSO: %d\tLVO: 0\n",
+           "\nCant. de Altas:\t\t\tLSD: %d \tLSO: %d \tLVO: %d"
+           "\nCant. de Bajas:\t\t\tLSD: %d \tLSO: %d \tLVO: %d"
+           "\nCant. de Consultas-Exito:\tLSD: %d \tLSO: %d \tLVO: %d"
+           "\nCant. de Consultas-Fracaso:\tLSD: %d \tLSO: %d \tLVO: %d\n",
+           cant_altas_LSD,
            cant_altas_LSO,
+           cant_altas_LVO,
+           cant_bajas_LSD,
            cant_bajas_LSO,
-           cant_pertenece_exito_LSO,
-           cant_pertenece_fracaso_LSO);
+           cant_bajas_LVO,
+           cant_consultas_exito_LSD,
+           cant_consultas_exito_LSO,
+           cant_consultas_exito_LVO,
+           cant_consultas_fracaso_LSD,
+           cant_consultas_fracaso_LSO,
+           cant_consultas_fracaso_LVO);
     printf("\nCostos de Altas"
            "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"

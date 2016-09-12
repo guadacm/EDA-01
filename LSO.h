@@ -247,12 +247,12 @@ int pertenece_LSO(char codArt[])
     int per = localizar_LSO(codArt, &loc) && (strcmp(LSO[loc].codigo, "ZZZZZZ") != 0);
     if (per == 1)
     {
-        cant_pertenece_exito_LSO++;
+        cant_consultas_exito_LSO++;
         return 1;
     }
     else
     {
-        cant_pertenece_fracaso_LSO++;
+        cant_consultas_fracaso_LSO++;
         return 0;
     }
 

@@ -8,6 +8,8 @@ int celda;
 
 void menu_LSD(int *op)
 {
+    cant_LSD = 0;
+
     while (*op != 0)
     {
         encabezado();
@@ -16,7 +18,7 @@ void menu_LSD(int *op)
         printf("\n[1] Nuevo articulo");
         printf("\n[2] Eliminar articulo");
         printf("\n[3] Consultar articulo");
-        printf("\n[4] Pertenece");
+        printf("\n[4] Articulo entregado a club");
         printf("\n[5] Mostrar articulos");
         printf("\n[6] Memorizacion previa");
         printf("\n\n[0] Volver\n");
@@ -53,7 +55,7 @@ void menu_LSD(int *op)
             printf(" Valor($):\t");
             fflush(stdin);
             scanf("%f",&nuevo.valor);
-            if(alta_LSD(nuevo, 0) == 1) printf("\n Enhorabuena tio, El articulo fue agregado con exito\n\n");
+            if(alta_LSD(nuevo) == 1) printf("\n Enhorabuena tio, El articulo fue agregado con exito\n\n");
             else printf("\nYa existe ese codigo, ingresaste los datos al pe :( \n\n");
             system("pause");
             break;
@@ -96,13 +98,13 @@ void menu_LSD(int *op)
             encabezado();
             printf("Lista Secuencial Desordenada\n");
             printf("_________________________\n");
-            printf("\n[4] Pertenece\n");
+            printf("\n[4] Articulo entregado a club\n");
             printf("\n Ingrese el codigo del articulo a consultar: ");
             fflush(stdin);
             scanf("%s",c);
             strupr(c);
-            if (pertenece_LSD(c) == 1) printf("\n\t El articulo codigo (%s) PERTENECE\n\n",c);
-            else printf("\n\t El articulo codigo (%s) NO PERTENECE\n\n",c);
+            if (pertenece_LSD(c) == 1) printf("\n\t Articulo codigo (%s) entregado a club\n\n",c);
+            else printf("\n\t Articulo codigo (%s) NO entregado a club\n\n",c);
             system("pause");
             break;
 
@@ -128,71 +130,58 @@ void menu_LSD(int *op)
     *op = -1;
 
 }
-int pertenece_LSD (char codigo [])
+int pertenece_LSD (char codArt [])
 {
     int exito,celda;
-    exito=localizar_LSD(codigo,&celda);
+    strupr(codArt);
+    exito=localizar_LSD(codArt,&celda);
     return exito;
 }
 
-int localizar_LSD(char codigo[], int *i)            //Localizacion Exitosa=1, noExitosa=0, i=posicion donde esta el elemento o deberia estar
+int localizar_LSD(char codArt[], int *i)            //Localizacion Exitosa=1, noExitosa=0, i=posicion donde esta el elemento o deberia estar
 {
-    //char code[8];
-    //strcpy(code,codigo);
-    //strupr(code);
-    strupr(codigo);
+    //strupr(codArt);
     (*i)=0;
-    while((*i)<cant_LSD && (strcmp(LSD[*i].codigo,codigo)!=0))
+    while((*i)<cant_LSD && (strcmp(LSD[*i].codigo,codArt)!=0))
     {
         (*i)++;
     }
     return (*i)<cant_LSD ;
-    //if ( strcmp(LSD[*i].codigo,codigo) == 0) return 1; // localizado
-    //else return 0; //no localizado
 }
 
 
-int alta_LSD(Articulo nuevo, int tipo) 	//int Tipo: (0)Entrada por telcado // (1)entrada por archivo  // return(1)=exito  //return(0)=fracaso
+int alta_LSD(Articulo nuevo) 	/// return(1)=exito  //return(0)=fracaso
 {
     int celda,exito;
     exito=localizar_LSD(nuevo.codigo,&celda);
-    //printf("\n exito de localizar=%d - Celda=%d\n",exito,celda);
     if (cant_LSD==DIM)
     {
-        //printf("\nERROR: Estructura Llena.");
         return 0;
     }
     if ( exito == 0)
     {
-        if (tipo==0)
-        {
-            LSD[celda]=nuevo; //entrada por teclado
-        }
-        if (tipo==1)
-        {
-            LSD[celda]=nuevo;
-        }
-        cant_LSD+=1;
+        LSD[celda]=nuevo;
+        cant_LSD++;
+        cant_altas_LSD++;
         return 1;
     }
     else
     {
         return 0;
     }
-
 }
 
-int baja_LSD(char codigo[], int tipo)
+int baja_LSD(char codArt[], int tipo)
 {
     int celda,exito;
     char c;
-    strupr(codigo);
-    exito=localizar_LSD(codigo,&celda);
+    strupr(codArt);
+    exito=localizar_LSD(codArt,&celda);
     if ( exito == 1)
     {
         if(tipo == 0)
-            c = confirmacion_baja(LSD[celda]);
-        if(c == 'S' || c == 's' )
+           c = confirmacion_baja(LSD[celda]);
+        if(c == 'S' || c == 's' || tipo == 1 )
         {
             if (celda==cant_LSD-1)
             {
@@ -205,7 +194,8 @@ int baja_LSD(char codigo[], int tipo)
             strcpy(LSD[celda].club,LSD[cant_LSD-1].club);
             LSD[celda].cantidad=LSD[cant_LSD-1].cantidad;
             LSD[celda].valor=LSD[cant_LSD-1].valor;
-            cant_LSD-=1;
+            cant_LSD--;
+            cant_bajas_LSD++;
             return 1; // exito dando de baja
         }
     }
@@ -216,24 +206,25 @@ int baja_LSD(char codigo[], int tipo)
 
 }
 
-Articulo evocar_LSD (char codigo[],int *exito)
+Articulo evocar_LSD (char codArt[],int *exito)
 {
     int ex,celda;
     Articulo temp;
-    ex=localizar_LSD(codigo,&celda);
+    strupr(codArt);
+    ex=localizar_LSD(codArt,&celda);
     if (ex==1)
     {
         *exito=1;
+        cant_consultas_exito_LSD++;
         return LSD[celda];
     }
     else
     {
         *exito=0;
+        cant_consultas_fracaso_LSD++;
         return temp;
     }
 }
-
-
 
 
 

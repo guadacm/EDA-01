@@ -238,12 +238,12 @@ int pertenece_LVO(char codArt[])
     int per = localizar_LVO(codArt, &loc);
     if (per == 1)
     {
-        cant_pertenece_exito_LVO++;
+        cant_consultas_exito_LVO++;
         return 1;
     }
     else
     {
-        cant_pertenece_fracaso_LVO++;
+        cant_consultas_fracaso_LVO++;
         return 0;
     }
 
