@@ -49,6 +49,10 @@ int cant_LSD;
 int cant_altas_LSD;
 int cant_bajas_LSD;
 int cant_consultas_exito_LSD, cant_consultas_fracaso_LSD;
+int celd_cons_exito_LSD, celd_cons_fracaso_LSD;
+int maximo_cons_exito_LSD, maximo_cons_fracaso_LSD;
+int maximo_alta_corr_LSD, maximo_baja_corr_LSD;
+int celd_corr_baja_LSD;
 
 // -- LSO
 Articulo LSO[DIM];

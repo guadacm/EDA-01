@@ -161,6 +161,7 @@ int alta_LSD(Articulo nuevo) 	/// return(1)=exito  //return(0)=fracaso
     if ( exito == 0)
     {
         LSD[celda]=nuevo;
+        maximo_alta_corr_LSD+=0;
         cant_LSD++;
         cant_altas_LSD++;
         return 1;
@@ -196,6 +197,8 @@ int baja_LSD(char codArt[], int tipo)
             LSD[celda].valor=LSD[cant_LSD-1].valor;
             cant_LSD--;
             cant_bajas_LSD++;
+            celd_corr_baja_LSD=1;
+            maximo_baja_corr_LSD=1;
             return 1; // exito dando de baja
         }
     }
@@ -215,12 +218,16 @@ Articulo evocar_LSD (char codArt[],int *exito)
     if (ex==1)
     {
         *exito=1;
+        if (maximo_cons_exito_LSD < celda){ maximo_cons_exito_LSD = celda; }
+        celd_cons_exito_LSD+=celda;
         cant_consultas_exito_LSD++;
         return LSD[celda];
     }
     else
     {
         *exito=0;
+        if (maximo_cons_fracaso_LSD < celda){ maximo_cons_fracaso_LSD = celda; }
+        celd_cons_fracaso_LSD+=celda;
         cant_consultas_fracaso_LSD++;
         return temp;
     }

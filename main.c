@@ -61,6 +61,13 @@ void comparacion()
     cant_bajas_LSD = 0;
     cant_consultas_exito_LSD = 0;
     cant_consultas_fracaso_LSD = 0;
+    celd_cons_exito_LSD = 0;
+    celd_cons_fracaso_LSD = 0;
+    celd_corr_baja_LSD = 0;
+    maximo_cons_exito_LSD = 0;
+    maximo_cons_fracaso_LSD = 0;
+    maximo_alta_corr_LSD = 0;
+    maximo_baja_corr_LSD = 0;
 
     // -- LSO
     cant_LSO = 0;
@@ -75,6 +82,8 @@ void comparacion()
     cant_bajas_LVO = 0;
     cant_consultas_exito_LVO = 0;
     cant_consultas_fracaso_LVO = 0;
+
+
     /* Fin inicializacion */
 
     encabezado();
@@ -104,22 +113,31 @@ void comparacion()
     printf("\nCostos de Altas"
            "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\nLSD:\t0\t\t0"
+           "\nLSD:\t0\t\t%d"
            "\nLSO:\t0\t\t0"
-           "\nLVO:\t0\t\t0");
+           "\nLVO:\t0\t\t0",
+           maximo_alta_corr_LSD
+           );
     printf("\n\nCostos de Bajas"
              "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\nLSD:\t0\t\t0"
+           "\nLSD:\t0\t\t%d"
            "\nLSO:\t0\t\t0"
-           "\nLVO:\t0\t\t0");
+           "\nLVO:\t0\t\t0",
+           (float)(celd_corr_baja_LSD/ cant_bajas_LSD),
+           maximo_baja_corr_LSD
+           );
 
-    printf("\n\nCostos de Pertenencia"
+    printf("\n\nCostos de Evocaciones"
              "\n---------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\nLSD:\t0\t\t0"
+           "\nLSD:\t%.2f\t\t%d"
            "\nLSO:\t0\t\t0"
-           "\nLVO:\t0\t\t0\n\n");
+           "\nLVO:\t0\t\t0\n\n",
+            (float)((float)celd_cons_exito_LSD/(float)cant_consultas_exito_LSD),
+            maximo_cons_exito_LSD
+
+           );
     system("pause");
 }
 
