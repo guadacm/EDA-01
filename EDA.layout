@@ -2,52 +2,72 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="LEEME.txt" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2168" topLine="0" />
+			<Cursor1 position="455" topLine="0" />
 		</Cursor>
-		<Folding>
-			<Collapse line="30" />
-			<Collapse line="103" />
-			<Collapse line="119" />
-		</Folding>
 	</File>
-	<File name="LSO.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="listas.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5622" topLine="0" />
+			<Cursor1 position="2185" topLine="58" />
 		</Cursor>
 		<Folding>
-			<Collapse line="5" />
-			<Collapse line="149" />
-			<Collapse line="185" />
-			<Collapse line="212" />
-			<Collapse line="244" />
+			<Collapse line="65" />
+			<Collapse line="81" />
+			<Collapse line="106" />
+			<Collapse line="145" />
+			<Collapse line="161" />
+			<Collapse line="186" />
 		</Folding>
 	</File>
 	<File name="LSD.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6500" topLine="206" />
+			<Cursor1 position="5269" topLine="157" />
 		</Cursor>
-	</File>
-	<File name="listas.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="716" topLine="18" />
-		</Cursor>
-		<Folding>
-			<Collapse line="54" />
-			<Collapse line="60" />
-			<Collapse line="80" />
-			<Collapse line="118" />
-			<Collapse line="135" />
-			<Collapse line="160" />
-		</Folding>
 	</File>
 	<File name="LVO.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1065" topLine="4" />
+			<Cursor1 position="8273" topLine="60" />
 		</Cursor>
 		<Folding>
-			<Collapse line="5" />
+			<Collapse line="29" />
+			<Collapse line="65" />
+			<Collapse line="85" />
+			<Collapse line="107" />
+			<Collapse line="126" />
+			<Collapse line="135" />
+			<Collapse line="149" />
+			<Collapse line="179" />
+			<Collapse line="204" />
+			<Collapse line="235" />
+			<Collapse line="252" />
+		</Folding>
+	</File>
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3755" topLine="13" />
+		</Cursor>
+		<Folding>
+			<Collapse line="21" />
+			<Collapse line="30" />
+			<Collapse line="55" />
+			<Collapse line="110" />
+			<Collapse line="126" />
+		</Folding>
+	</File>
+	<File name="LSO.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4799" topLine="38" />
+		</Cursor>
+		<Folding>
+			<Collapse line="28" />
+			<Collapse line="64" />
+			<Collapse line="125" />
+			<Collapse line="134" />
+			<Collapse line="149" />
+			<Collapse line="185" />
+			<Collapse line="211" />
+			<Collapse line="244" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>

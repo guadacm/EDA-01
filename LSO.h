@@ -186,6 +186,7 @@ int alta_LSO(Articulo nuevo) //-- DEVUELVE: 1.Exito 0.Fracaso.
 {
     if (cant_LSO < DIM)
     {
+        int corrimientos = 0;
         int loc;
         if (localizar_LSO(nuevo.codigo, &loc) == 0)
         {
@@ -193,10 +194,12 @@ int alta_LSO(Articulo nuevo) //-- DEVUELVE: 1.Exito 0.Fracaso.
             for(i = cant_LSO; i >= loc; i--)
             {
                 LSO[i + 1] = LSO[i];
+                corrimientos++;
             }
             LSO[loc] = nuevo;
             cant_LSO++;
             cant_altas_LSO++;
+            corrimientos_alta_LSO = corrimientos_alta_LSO + corrimientos;
             return 1;
         }
         else
@@ -212,6 +215,7 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
 {
     if(cant_LSO != 0)
     {
+        int corrimientos = 0;
         int loc;
         char c = 'S';
         if(localizar_LSO(codArt, &loc) == 1)
@@ -224,9 +228,11 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
                 for(i = loc; i<cant_LSO; i++)
                 {
                     LSO[i] = LSO[i + 1];
+                    corrimientos++;
                 }
                 cant_LSO--;
                 cant_bajas_LSO++;
+                corrimientos_baja_LSO = corrimientos_baja_LSO + corrimientos;
                 return 1;
             }
             else
@@ -247,12 +253,12 @@ int pertenece_LSO(char codArt[])
     int per = localizar_LSO(codArt, &loc) && (strcmp(LSO[loc].codigo, "ZZZZZZ") != 0);
     if (per == 1)
     {
-        cant_consultas_exito_LSO++;
+        cant_evocaciones_exito_LSO++;
         return 1;
     }
     else
     {
-        cant_consultas_fracaso_LSO++;
+        cant_evocaciones_fracaso_LSO++;
         return 0;
     }
 

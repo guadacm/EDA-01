@@ -59,7 +59,9 @@ Articulo LSO[DIM];
 int cant_LSO;
 int cant_altas_LSO;
 int cant_bajas_LSO;
-int cant_consultas_exito_LSO, cant_consultas_fracaso_LSO;
+int cant_evocaciones_exito_LSO, cant_evocaciones_fracaso_LSO;
+int corrimientos_alta_LSO, corrimientos_baja_LSO;
+int consultadas_exito_LSO, consultadas_fracaso_LSO;
 
 // -- LVO
 Nodo LVO; // Apunta al primer nodo de la lista

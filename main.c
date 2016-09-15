@@ -74,14 +74,18 @@ void comparacion()
     strcpy(LSO[0].codigo, "ZZZZZZ"); // -- +inf
     cant_altas_LSO = 0;
     cant_bajas_LSO = 0;
-    cant_consultas_exito_LSO = 0;
-    cant_consultas_fracaso_LSO = 0;
+    cant_evocaciones_exito_LSO = 0;
+    cant_evocaciones_fracaso_LSO = 0;
 
     // -- LVO
     cant_altas_LVO = 0;
     cant_bajas_LVO = 0;
     cant_consultas_exito_LVO = 0;
     cant_consultas_fracaso_LVO = 0;
+    corrimientos_alta_LSO = 0;
+    corrimientos_baja_LSO = 0;
+    consultadas_exito_LSO = 0;
+    consultadas_fracaso_LSO = 0;
 
 
     /* Fin inicializacion */
@@ -96,8 +100,8 @@ void comparacion()
            "\t       --------------------------       \n"
            "\nCant. de Altas:\t\t\tLSD: %d \tLSO: %d \tLVO: %d"
            "\nCant. de Bajas:\t\t\tLSD: %d \tLSO: %d \tLVO: %d"
-           "\nCant. de Consultas-Exito:\tLSD: %d \tLSO: %d \tLVO: %d"
-           "\nCant. de Consultas-Fracaso:\tLSD: %d \tLSO: %d \tLVO: %d\n",
+           "\nCant. de Evocaciones-Exito:\tLSD: %d \tLSO: %d \tLVO: %d"
+           "\nCant. de Evocaciones-Fracaso:\tLSD: %d \tLSO: %d \tLVO: %d\n",
            cant_altas_LSD,
            cant_altas_LSO,
            cant_altas_LVO,
@@ -105,31 +109,42 @@ void comparacion()
            cant_bajas_LSO,
            cant_bajas_LVO,
            cant_consultas_exito_LSD,
-           cant_consultas_exito_LSO,
+           cant_evocaciones_exito_LSO,
            cant_consultas_exito_LVO,
            cant_consultas_fracaso_LSD,
-           cant_consultas_fracaso_LSO,
+           cant_evocaciones_fracaso_LSO,
            cant_consultas_fracaso_LVO);
     printf("\nCostos de Altas"
            "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
            "\nLSD:\t0\t\t%d"
-           "\nLSO:\t0\t\t0"
+           "\nLSO:\t%.2f\t\t0"
            "\nLVO:\t0\t\t0",
-           maximo_alta_corr_LSD
+           maximo_alta_corr_LSD,
+           (float)(corrimientos_alta_LSO/cant_altas_LSO)
            );
     printf("\n\nCostos de Bajas"
              "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\nLSD:\t0\t\t%d"
+           "\nLSD:\t%.2f\t\t%d"
            "\nLSO:\t0\t\t0"
            "\nLVO:\t0\t\t0",
            (float)(celd_corr_baja_LSD/ cant_bajas_LSD),
            maximo_baja_corr_LSD
            );
 
-    printf("\n\nCostos de Evocaciones"
-             "\n---------------------"
+    printf("\n\nCostos de Evocaciones Exitosas"
+             "\n------------------------------"
+           "\n\tMEDIOS:\t\tMAXIMOS:"
+           "\nLSD:\t%.2f\t\t%d"
+           "\nLSO:\t0\t\t0"
+           "\nLVO:\t0\t\t0",
+            (float)((float)celd_cons_exito_LSD/(float)cant_consultas_exito_LSD),
+            maximo_cons_exito_LSD
+
+           );
+    printf("\n\nCostos de Evocaciones NO Exitosas"
+             "\n---------------------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
            "\nLSD:\t%.2f\t\t%d"
            "\nLSO:\t0\t\t0"
