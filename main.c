@@ -6,7 +6,7 @@
  * -- Funciones de costos:
  *                        - Alta y Baja -> Cantidad de corrimientos para LSD y LSO
  *                                      -> Actualizacion de puntero para LVO
- *                        - Pertenencia -> Cantidad de celdas consultadas para todas las listas
+ *                        - Evocaciones -> Cantidad de celdas consultadas para todas las listas
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -90,6 +90,14 @@ void comparacion()
     cant_bajas_LVO = 0;
     cant_consultas_exito_LVO = 0;
     cant_consultas_fracaso_LVO = 0;
+    total_corrimientos_alta_LVO = 0;
+    total_corrimientos_baja_LVO = 0;
+    total_consultadas_exito_LVO = 0;
+    total_consultadas_fracaso_LVO = 0;
+    maximo_alta_LVO = 0;
+    maximo_baja_LVO = 0;
+    maximo_evo_exito_LVO = 0;
+    maximo_evo_fracaso_LVO = 0;
 
 
 
@@ -102,32 +110,36 @@ void comparacion()
 
     encabezado();
     printf("\t       Comparacion de estructuras       \n"
+           "\t\tTotal de Articulos: %d\n"
            "\t       --------------------------       \n"
+
            "\nCant. de Altas:\t\t\tLSD: %d \tLSO: %d \tLVO: %d"
            "\nCant. de Bajas:\t\t\tLSD: %d \tLSO: %d \tLVO: %d"
            "\nCant. de Evocaciones-Exito:\tLSD: %d \tLSO: %d \tLVO: %d"
            "\nCant. de Evocaciones-Fracaso:\tLSD: %d \tLSO: %d \tLVO: %d\n",
-           cant_altas_LSD, cant_altas_LSO, cant_altas_LVO,
+           cant_LSO,cant_altas_LSD, cant_altas_LSO, cant_altas_LVO,
            cant_bajas_LSD, cant_bajas_LSO, cant_bajas_LVO,
            cant_consultas_exito_LSD, cant_evocaciones_exito_LSO, cant_consultas_exito_LVO,
            cant_consultas_fracaso_LSD, cant_evocaciones_fracaso_LSO, cant_consultas_fracaso_LVO);
     printf("\nCostos de Altas"
            "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\nLSD:\t0\t\t%d"
+           "\nLSD:\t0\t\t0"
            "\nLSO:\t%.2f\t\t%d"
-           "\nLVO:\t0\t\t0",
-           maximo_alta_corr_LSD,
-           (float)(total_corrimientos_alta_LSO/cant_altas_LSO), maximo_alta_LSO
+           "\nLVO:\t%.2f\t\t%.2f",
+
+           (float)((float)total_corrimientos_alta_LSO/(float)cant_altas_LSO), maximo_alta_LSO,
+           (float)(total_corrimientos_alta_LVO/(float)cant_altas_LVO),maximo_alta_LVO
            );
     printf("\n\nCostos de Bajas"
              "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
            "\nLSD:\t%.2f\t\t%d"
            "\nLSO:\t%.2f\t\t%d"
-           "\nLVO:\t0\t\t0",
-           (float)(celd_corr_baja_LSD/ cant_bajas_LSD), maximo_baja_corr_LSD,
-           (float)(total_corrimientos_baja_LSO/cant_bajas_LSO), maximo_baja_LSO
+           "\nLVO:\t%.2f\t\t%.2f",
+           (float)((float)celd_corr_baja_LSD/(float) cant_bajas_LSD), maximo_baja_corr_LSD,
+           (float)((float)total_corrimientos_baja_LSO/(float)cant_bajas_LSO), maximo_baja_LSO,
+           (float)(total_corrimientos_baja_LVO/(float)cant_bajas_LVO),maximo_baja_LVO
            );
 
     printf("\n\nCostos de Evocaciones Exitosas"
@@ -137,16 +149,17 @@ void comparacion()
            "\nLSO:\t%.2f\t\t%d"
            "\nLVO:\t0\t\t0",
            (float)((float)celd_cons_exito_LSD/(float)cant_consultas_exito_LSD), maximo_cons_exito_LSD,
-           (float)(total_consultadas_exito_LSO/cant_evocaciones_exito_LSO), maximo_evo_exito_LSO
+           (float)((float)total_consultadas_exito_LSO/(float)cant_evocaciones_exito_LSO), maximo_evo_exito_LSO
 
            );
     printf("\n\nCostos de Evocaciones NO Exitosas"
              "\n---------------------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\nLSD:\t0\t\t0"
+           "\nLSD:\t%.2f\t\t%d"
            "\nLSO:\t%.2f\t\t%d"
            "\nLVO:\t0\t\t0\n\n",
-           (float)(total_consultadas_fracaso_LSO/cant_evocaciones_fracaso_LSO), maximo_evo_fracaso_LSO
+           (float)((float)celd_cons_fracaso_LSD/(float)cant_consultas_fracaso_LSD), maximo_cons_fracaso_LSD,
+           (float)((float)total_consultadas_fracaso_LSO/(float)cant_evocaciones_fracaso_LSO), maximo_evo_fracaso_LSO
            );
     system("pause");
 }

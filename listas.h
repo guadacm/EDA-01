@@ -22,7 +22,7 @@ void encabezado();
 void borrar_salto(Articulo *art);
 
 // -- LSD
-int localizar_LSD(char codigo[], int *i);
+int localizar_LSD(char codigo[], int *i,int conCosto);
 Articulo evocar_LSD (char codigo[],int *exito);
 
 // -- LSO
@@ -70,6 +70,14 @@ int cant_LVO;
 int cant_altas_LVO;
 int cant_bajas_LVO;
 int cant_consultas_exito_LVO, cant_consultas_fracaso_LVO;
+float total_corrimientos_alta_LVO;
+float total_corrimientos_baja_LVO;
+int total_consultadas_exito_LVO;
+int total_consultadas_fracaso_LVO ;
+float maximo_alta_LVO;
+float maximo_baja_LVO;
+int maximo_evo_exito_LVO;
+int maximo_evo_fracaso_LVO;
 /* FIN VARIABLES */
 
 void imprimirArt(Articulo Art)

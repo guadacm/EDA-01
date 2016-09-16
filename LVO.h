@@ -185,9 +185,18 @@ int alta_LVO(Articulo nuevo)
         {
             Nodo *nuevoNodo = malloc(sizeof(Nodo));
             nuevoNodo->dato = nuevo;
+
+            if (loc->next == NULL) {
+                total_corrimientos_alta_LVO+=0.5;
+                if (maximo_alta_LVO < 0.5) maximo_alta_LVO = 0.5;
+                }
+            if (loc->next != NULL) {
+                total_corrimientos_alta_LVO+=1.0;
+                if (maximo_alta_LVO < 1.0) maximo_alta_LVO = 1.0;
+            }
+
             nuevoNodo->next = loc->next;
             loc->next = nuevoNodo;
-
             cant_LVO++;
             cant_altas_LVO++;
             return 1;
@@ -216,6 +225,8 @@ int baja_LVO(char codArt[], int entrada)
             {
                 loc->next = loc->next->next;
                 free(aux);
+                total_corrimientos_baja_LVO+=0.5;
+                if (maximo_baja_LVO < 0.5) maximo_baja_LVO = 0.5;
                 cant_LVO--;
                 cant_bajas_LVO++;
                 return 1;

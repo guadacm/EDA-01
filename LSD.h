@@ -134,11 +134,11 @@ int pertenece_LSD (char codArt [])
 {
     int exito,celda;
     strupr(codArt);
-    exito=localizar_LSD(codArt,&celda);
+    exito=localizar_LSD(codArt,&celda,0);
     return exito;
 }
 
-int localizar_LSD(char codArt[], int *i)            //Localizacion Exitosa=1, noExitosa=0, i=posicion donde esta el elemento o deberia estar
+int localizar_LSD(char codArt[], int *i, int conCosto)            //Localizacion Exitosa=1, noExitosa=0, i=posicion donde esta el elemento o deberia estar
 {
     //strupr(codArt);
     (*i)=0;
@@ -146,6 +146,14 @@ int localizar_LSD(char codArt[], int *i)            //Localizacion Exitosa=1, no
     {
         (*i)++;
     }
+    if (((*i)<cant_LSD)==1 && conCosto==1) {
+            if (maximo_cons_exito_LSD < (*i)){ maximo_cons_exito_LSD = (*i); }
+            celd_cons_exito_LSD+=(*i);}
+
+    if (((*i)<cant_LSD)==0 && conCosto==1){
+            if (maximo_cons_fracaso_LSD < (*i)){ maximo_cons_fracaso_LSD = (*i); }
+            celd_cons_fracaso_LSD+=(*i);}
+
     return (*i)<cant_LSD ;
 }
 
@@ -153,7 +161,7 @@ int localizar_LSD(char codArt[], int *i)            //Localizacion Exitosa=1, no
 int alta_LSD(Articulo nuevo) 	/// return(1)=exito  //return(0)=fracaso
 {
     int celda,exito;
-    exito=localizar_LSD(nuevo.codigo,&celda);
+    exito=localizar_LSD(nuevo.codigo,&celda,0);
     if (cant_LSD==DIM)
     {
         return 0;
@@ -177,7 +185,7 @@ int baja_LSD(char codArt[], int tipo)
     int celda,exito;
     char c;
     strupr(codArt);
-    exito=localizar_LSD(codArt,&celda);
+    exito=localizar_LSD(codArt,&celda,0);
     if ( exito == 1)
     {
         if(tipo == 0)
@@ -186,7 +194,9 @@ int baja_LSD(char codArt[], int tipo)
         {
             if (celda==cant_LSD-1)
             {
-                cant_LSD-=1;
+
+                celd_corr_baja_LSD+=0;
+                cant_LSD--;
                 return 1;
             }
             strcpy(LSD[celda].codigo,LSD[cant_LSD-1].codigo);
@@ -197,8 +207,8 @@ int baja_LSD(char codArt[], int tipo)
             LSD[celda].valor=LSD[cant_LSD-1].valor;
             cant_LSD--;
             cant_bajas_LSD++;
-            celd_corr_baja_LSD=1;
-            maximo_baja_corr_LSD=1;
+            celd_corr_baja_LSD+=1;
+            if (maximo_baja_corr_LSD < 1) maximo_baja_corr_LSD+=1;
             return 1; // exito dando de baja
         }
     }
@@ -214,20 +224,22 @@ Articulo evocar_LSD (char codArt[],int *exito)
     int ex,celda;
     Articulo temp;
     strupr(codArt);
-    ex=localizar_LSD(codArt,&celda);
+    ex=localizar_LSD(codArt,&celda,1);
     if (ex==1)
     {
         *exito=1;
-        if (maximo_cons_exito_LSD < celda){ maximo_cons_exito_LSD = celda; }
+        /*if (maximo_cons_exito_LSD < celda){ maximo_cons_exito_LSD = celda; }
         celd_cons_exito_LSD+=celda;
+        cant_consultas_exito_LSD++;*/
         cant_consultas_exito_LSD++;
         return LSD[celda];
     }
     else
     {
         *exito=0;
-        if (maximo_cons_fracaso_LSD < celda){ maximo_cons_fracaso_LSD = celda; }
+        /*if (maximo_cons_fracaso_LSD < celda){ maximo_cons_fracaso_LSD = celda; }
         celd_cons_fracaso_LSD+=celda;
+        cant_consultas_fracaso_LSD++;*/
         cant_consultas_fracaso_LSD++;
         return temp;
     }
