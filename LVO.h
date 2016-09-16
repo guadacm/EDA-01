@@ -238,12 +238,10 @@ int pertenece_LVO(char codArt[])
     int per = localizar_LVO(codArt, &loc);
     if (per == 1)
     {
-        cant_consultas_exito_LVO++;
         return 1;
     }
     else
     {
-        cant_consultas_fracaso_LVO++;
         return 0;
     }
 
@@ -255,9 +253,16 @@ Articulo evocar_LVO(char codArt[])
     Articulo aux;
     strcpy(aux.codigo, "000000");
     if(localizar_LVO(codArt, &loc) == 1)
+    {
+        cant_consultas_exito_LVO++;
         return loc->next->dato;
+    }
     else
+    {
+        cant_consultas_fracaso_LVO++;
         return aux;
+    }
+
 }
 
 void mostrar_LVO()

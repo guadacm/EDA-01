@@ -60,8 +60,9 @@ int cant_LSO;
 int cant_altas_LSO;
 int cant_bajas_LSO;
 int cant_evocaciones_exito_LSO, cant_evocaciones_fracaso_LSO;
-int corrimientos_alta_LSO, corrimientos_baja_LSO;
-int consultadas_exito_LSO, consultadas_fracaso_LSO;
+int total_corrimientos_alta_LSO, total_corrimientos_baja_LSO;
+int total_consultadas_exito_LSO, total_consultadas_fracaso_LSO;
+int maximo_alta_LSO, maximo_baja_LSO, maximo_evo_exito_LSO, maximo_evo_fracaso_LSO;
 
 // -- LVO
 Nodo LVO; // Apunta al primer nodo de la lista
@@ -233,8 +234,8 @@ void lectura_archivo_operaciones()
                     break;
                 case 3:
                     evocar_LSD(nuevo.codigo,&auxiliar);
-                    pertenece_LSO(nuevo.codigo);
-                    pertenece_LVO(nuevo.codigo);
+                    evocar_LSO(nuevo.codigo);
+                    evocar_LVO(nuevo.codigo);
                     break;
 
             }
