@@ -23,10 +23,13 @@ void borrar_salto(Articulo *art);
 
 // -- LSD
 int localizar_LSD(char codigo[], int *i,int conCosto);
+int alta_LSD(Articulo nuevo);
+int baja_LSD(char codArt[], int tipo);
+int pertenece_LSD (char codArt []);
 Articulo evocar_LSD (char codigo[],int *exito);
 
 // -- LSO
-int localizar_LSO(char codArt[], int *posicion);
+int localizar_LSO(char codArt[], int *posicion, int conCosto);
 int alta_LSO(Articulo nuevo);
 int baja_LSO(char codArt[], int entrada);
 int pertenece_LSO(char codArt[]);

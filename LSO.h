@@ -146,7 +146,7 @@ void menu_LSO(int *op)
 
 }
 
-int localizar_LSO(char codArt[], int *posicion) //-- DEVUELVE: 1.Exito 0.Fracaso
+int localizar_LSO(char codArt[], int *posicion, int conCosto) //-- DEVUELVE: 1.Exito 0.Fracaso
 {
     int consultadas = 0;
     int li, ls, testigo;
@@ -171,18 +171,26 @@ int localizar_LSO(char codArt[], int *posicion) //-- DEVUELVE: 1.Exito 0.Fracaso
         consultadas++;
         if(strcmp(codArt, LSO[li].codigo) == 0)
         {
-            if(maximo_evo_exito_LSO < consultadas)
-                maximo_evo_exito_LSO = consultadas;
+            if (conCosto == 1)
+            {
+                if(maximo_evo_exito_LSO < consultadas)
+                    maximo_evo_exito_LSO = consultadas;
 
-            total_consultadas_exito_LSO = total_consultadas_exito_LSO + consultadas;
+                total_consultadas_exito_LSO = total_consultadas_exito_LSO + consultadas;
+            }
+
             return 1;
         }
         else
         {
-            if(maximo_evo_fracaso_LSO < consultadas)
-                maximo_evo_fracaso_LSO = consultadas;
+            if (conCosto == 1)
+            {
+                if(maximo_evo_fracaso_LSO < consultadas)
+                    maximo_evo_fracaso_LSO = consultadas;
 
-            total_consultadas_fracaso_LSO = total_consultadas_fracaso_LSO + consultadas;
+                total_consultadas_fracaso_LSO = total_consultadas_fracaso_LSO + consultadas;
+            }
+
             return 0;
         }
     }
@@ -199,7 +207,7 @@ int alta_LSO(Articulo nuevo) //-- DEVUELVE: 1.Exito 0.Fracaso.
     {
         int corrimientos = 0;
         int loc;
-        if (localizar_LSO(nuevo.codigo, &loc) == 0)
+        if (localizar_LSO(nuevo.codigo, &loc, 0) == 0)
         {
             int i;
             for(i = cant_LSO; i >= loc; i--)
@@ -231,7 +239,7 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
         int corrimientos = 0;
         int loc;
         char c = 'S';
-        if(localizar_LSO(codArt, &loc) == 1)
+        if(localizar_LSO(codArt, &loc, 0) == 1)
         {
             if(entrada == 0)
                 c = confirmacion_baja(LSO[loc]);
@@ -265,7 +273,7 @@ int baja_LSO(char codArt[], int entrada) //-- DEVUELVE: 1.Exito 0.Fracaso
 int pertenece_LSO(char codArt[])
 {
     int loc;
-    int per = localizar_LSO(codArt, &loc) && (strcmp(LSO[loc].codigo, "ZZZZZZ") != 0);
+    int per = localizar_LSO(codArt, &loc, 0) && (strcmp(LSO[loc].codigo, "ZZZZZZ") != 0);
     if (per == 1)
     {
         return 1;
@@ -282,7 +290,7 @@ Articulo evocar_LSO(char codArt[])
     int loc;
     Articulo aux;
     strcpy(aux.codigo, "ZZZZZZ");
-    if(localizar_LSO(codArt, &loc) == 1)
+    if(localizar_LSO(codArt, &loc, 1) == 1)
     {
         cant_evocaciones_exito_LSO++;
         return LSO[loc];

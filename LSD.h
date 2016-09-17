@@ -130,6 +130,7 @@ void menu_LSD(int *op)
     *op = -1;
 
 }
+
 int pertenece_LSD (char codArt [])
 {
     int exito,celda;
@@ -194,29 +195,30 @@ int baja_LSD(char codArt[], int tipo)
         {
             if (celda==cant_LSD-1)
             {
-
                 celd_corr_baja_LSD+=0;
                 cant_LSD--;
                 return 1;
             }
-            strcpy(LSD[celda].codigo,LSD[cant_LSD-1].codigo);
+            /*strcpy(LSD[celda].codigo,LSD[cant_LSD-1].codigo);
             strcpy(LSD[celda].articulo,LSD[cant_LSD-1].articulo);
             strcpy(LSD[celda].marca,LSD[cant_LSD-1].marca);
             strcpy(LSD[celda].club,LSD[cant_LSD-1].club);
             LSD[celda].cantidad=LSD[cant_LSD-1].cantidad;
-            LSD[celda].valor=LSD[cant_LSD-1].valor;
+            LSD[celda].valor=LSD[cant_LSD-1].valor;*/
+            LSD[celda] = LSD[cant_LSD-1];
             cant_LSD--;
             cant_bajas_LSD++;
             celd_corr_baja_LSD+=1;
             if (maximo_baja_corr_LSD < 1) maximo_baja_corr_LSD+=1;
             return 1; // exito dando de baja
         }
+        else
+            return 0;
     }
     else
     {
         return 0; //fracaso dando de baja
     }
-
 }
 
 Articulo evocar_LSD (char codArt[],int *exito)

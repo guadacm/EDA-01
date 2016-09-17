@@ -86,6 +86,9 @@ void comparacion()
     maximo_evo_fracaso_LSO = 0;
 
     // -- LVO
+    cant_LVO = 0;
+    strcpy(LVO.dato.articulo, "000000");
+    LVO.next = NULL;
     cant_altas_LVO = 0;
     cant_bajas_LVO = 0;
     cant_consultas_exito_LVO = 0;
