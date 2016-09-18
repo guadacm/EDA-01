@@ -146,26 +146,56 @@ void menu_LVO(int *op)
     *op = -1;
 }
 
-int localizar_LVO(char codArt[], Nodo **posicion) //-- DEVUELVE: 1.Exito 0.Fracaso
+int localizar_LVO(char codArt[], Nodo **posicion, int conCosto) //-- DEVUELVE: 1.Exito 0.Fracaso
 {
     if (cant_LVO >0)
     {
+        int consultadas = 0;
         Nodo *aux = &LVO;
         Nodo *aux1 = &LVO;
+        consultadas++;
         while ((aux != NULL) && (strcmp(aux->dato.codigo, codArt) < 0))
         {
             aux1 = aux;
             aux = aux->next;
+            consultadas++;
         }
         *posicion = aux1;
         if(aux == NULL)
+        {
+            if(conCosto == 1)
+            {
+                total_consultadas_fracaso_LVO += consultadas;
+                if(maximo_evo_fracaso_LVO < consultadas)
+                    maximo_evo_fracaso_LVO = consultadas;
+            }
             return 0;
+        }
+
         else
         {
             if(strcmp(aux->dato.codigo, codArt) == 0)
+            {
+                if(conCosto == 1)
+                {
+                    total_consultadas_exito_LVO += consultadas;
+                    if(maximo_evo_exito_LVO < consultadas)
+                        maximo_evo_exito_LVO = consultadas;
+                }
                 return 1;
+            }
+
             else
+            {
+                if(conCosto == 1)
+                {
+                    total_consultadas_fracaso_LVO += consultadas;
+                    if(maximo_evo_fracaso_LVO < consultadas)
+                        maximo_evo_fracaso_LVO = consultadas;
+                }
                 return 0;
+            }
+
         }
     }
     else
@@ -181,7 +211,7 @@ int alta_LVO(Articulo nuevo)
     if(cant_LVO < DIM)
     {
         Nodo *loc;
-        if (localizar_LVO(nuevo.codigo, &loc) == 0)
+        if (localizar_LVO(nuevo.codigo, &loc, 0) == 0)
         {
             Nodo *nuevoNodo = malloc(sizeof(Nodo));
             nuevoNodo->dato = nuevo;
@@ -220,7 +250,7 @@ int baja_LVO(char codArt[], int entrada)
     {
         Nodo *loc;
         char c = 'S';
-        if(localizar_LVO(codArt, &loc) == 1)
+        if(localizar_LVO(codArt, &loc, 0) == 1)
         {
             Nodo *aux = loc->next;
             if(entrada == 0)
@@ -250,7 +280,7 @@ int baja_LVO(char codArt[], int entrada)
 int pertenece_LVO(char codArt[])
 {
     Nodo *loc;
-    int per = localizar_LVO(codArt, &loc);
+    int per = localizar_LVO(codArt, &loc, 0);
     if (per == 1)
     {
         return 1;
@@ -267,14 +297,14 @@ Articulo evocar_LVO(char codArt[])
     Nodo *loc;
     Articulo aux;
     strcpy(aux.codigo, "000000");
-    if(localizar_LVO(codArt, &loc) == 1)
+    if(localizar_LVO(codArt, &loc, 1) == 1)
     {
-        cant_consultas_exito_LVO++;
+        cant_evocaciones_exito_LVO++;
         return loc->next->dato;
     }
     else
     {
-        cant_consultas_fracaso_LVO++;
+        cant_evocaciones_fracaso_LVO++;
         return aux;
     }
 

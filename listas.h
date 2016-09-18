@@ -36,7 +36,7 @@ int pertenece_LSO(char codArt[]);
 Articulo evocar_LSO(char codArt[]);
 
 // -- LVO
-int localizar_LVO(char codArt[], Nodo **posicion);
+int localizar_LVO(char codArt[], Nodo **posicion, int conCosto);
 int alta_LVO(Articulo nuevo);
 int baja_LVO(char codArt[], int entrada);
 int pertenece_LVO(char codArt[]);
@@ -72,7 +72,7 @@ Nodo LVO; // Apunta al primer nodo de la lista
 int cant_LVO;
 int cant_altas_LVO;
 int cant_bajas_LVO;
-int cant_consultas_exito_LVO, cant_consultas_fracaso_LVO;
+int cant_evocaciones_exito_LVO, cant_evocaciones_fracaso_LVO;
 float total_corrimientos_alta_LVO;
 float total_corrimientos_baja_LVO;
 int total_consultadas_exito_LVO;
@@ -209,7 +209,7 @@ void lectura_archivo_operaciones()
     int cod_op,auxiliar;
     Articulo nuevo;
     FILE *fp;
-    if((fp = fopen("Operaciones.txt", "r")) == NULL)
+    if((fp = fopen("OperacionesPrueba.txt", "r")) == NULL)
         printf("\n\nERROR: No se pudo abrir el archivo\n\n");
     else
     {

@@ -91,8 +91,8 @@ void comparacion()
     LVO.next = NULL;
     cant_altas_LVO = 0;
     cant_bajas_LVO = 0;
-    cant_consultas_exito_LVO = 0;
-    cant_consultas_fracaso_LVO = 0;
+    cant_evocaciones_exito_LVO = 0;
+    cant_evocaciones_fracaso_LVO = 0;
     total_corrimientos_alta_LVO = 0;
     total_corrimientos_baja_LVO = 0;
     total_consultadas_exito_LVO = 0;
@@ -122,8 +122,8 @@ void comparacion()
            "\nCant. de Evocaciones-Fracaso:\tLSD: %d \tLSO: %d \tLVO: %d\n",
            cant_LSO,cant_altas_LSD, cant_altas_LSO, cant_altas_LVO,
            cant_bajas_LSD, cant_bajas_LSO, cant_bajas_LVO,
-           cant_consultas_exito_LSD, cant_evocaciones_exito_LSO, cant_consultas_exito_LVO,
-           cant_consultas_fracaso_LSD, cant_evocaciones_fracaso_LSO, cant_consultas_fracaso_LVO);
+           cant_consultas_exito_LSD, cant_evocaciones_exito_LSO, cant_evocaciones_exito_LVO,
+           cant_consultas_fracaso_LSD, cant_evocaciones_fracaso_LSO, cant_evocaciones_fracaso_LVO);
     printf("\nCostos de Altas"
            "\n---------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
@@ -131,8 +131,8 @@ void comparacion()
            "\nLSO:\t%.2f\t\t%d"
            "\nLVO:\t%.2f\t\t%.2f",
 
-           (float)((float)total_corrimientos_alta_LSO/(float)cant_altas_LSO), maximo_alta_LSO,
-           (float)(total_corrimientos_alta_LVO/(float)cant_altas_LVO),maximo_alta_LVO
+           ((float)total_corrimientos_alta_LSO/(float)cant_altas_LSO), maximo_alta_LSO,
+           (total_corrimientos_alta_LVO/(float)cant_altas_LVO),maximo_alta_LVO
            );
     printf("\n\nCostos de Bajas"
              "\n---------------"
@@ -140,9 +140,9 @@ void comparacion()
            "\nLSD:\t%.2f\t\t%d"
            "\nLSO:\t%.2f\t\t%d"
            "\nLVO:\t%.2f\t\t%.2f",
-           (float)((float)celd_corr_baja_LSD/(float) cant_bajas_LSD), maximo_baja_corr_LSD,
-           (float)((float)total_corrimientos_baja_LSO/(float)cant_bajas_LSO), maximo_baja_LSO,
-           (float)(total_corrimientos_baja_LVO/(float)cant_bajas_LVO),maximo_baja_LVO
+           ((float)celd_corr_baja_LSD/(float) cant_bajas_LSD), maximo_baja_corr_LSD,
+           ((float)total_corrimientos_baja_LSO/(float)cant_bajas_LSO), maximo_baja_LSO,
+           (total_corrimientos_baja_LVO/(float)cant_bajas_LVO),maximo_baja_LVO
            );
 
     printf("\n\nCostos de Evocaciones Exitosas"
@@ -150,9 +150,10 @@ void comparacion()
            "\n\tMEDIOS:\t\tMAXIMOS:"
            "\nLSD:\t%.2f\t\t%d"
            "\nLSO:\t%.2f\t\t%d"
-           "\nLVO:\t0\t\t0",
-           (float)((float)celd_cons_exito_LSD/(float)cant_consultas_exito_LSD), maximo_cons_exito_LSD,
-           (float)((float)total_consultadas_exito_LSO/(float)cant_evocaciones_exito_LSO), maximo_evo_exito_LSO
+           "\nLVO:\t%.2f\t\t%d",
+           ((float)celd_cons_exito_LSD/(float)cant_consultas_exito_LSD), maximo_cons_exito_LSD,
+           ((float)total_consultadas_exito_LSO/(float)cant_evocaciones_exito_LSO), maximo_evo_exito_LSO,
+           ((float)total_consultadas_exito_LVO/(float)cant_evocaciones_exito_LVO), maximo_evo_exito_LVO
 
            );
     printf("\n\nCostos de Evocaciones NO Exitosas"
@@ -160,9 +161,10 @@ void comparacion()
            "\n\tMEDIOS:\t\tMAXIMOS:"
            "\nLSD:\t%.2f\t\t%d"
            "\nLSO:\t%.2f\t\t%d"
-           "\nLVO:\t0\t\t0\n\n",
-           (float)((float)celd_cons_fracaso_LSD/(float)cant_consultas_fracaso_LSD), maximo_cons_fracaso_LSD,
-           (float)((float)total_consultadas_fracaso_LSO/(float)cant_evocaciones_fracaso_LSO), maximo_evo_fracaso_LSO
+           "\nLVO:\t%.2f\t\t%d\n\n",
+           ((float)celd_cons_fracaso_LSD/(float)cant_consultas_fracaso_LSD), maximo_cons_fracaso_LSD,
+           ((float)total_consultadas_fracaso_LSO/(float)cant_evocaciones_fracaso_LSO), maximo_evo_fracaso_LSO,
+           ((float)total_consultadas_fracaso_LVO/(float)cant_evocaciones_fracaso_LVO), maximo_evo_fracaso_LVO
            );
     system("pause");
 }

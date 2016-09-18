@@ -197,6 +197,7 @@ int baja_LSD(char codArt[], int tipo)
             {
                 celd_corr_baja_LSD+=0;
                 cant_LSD--;
+                cant_bajas_LSD++;
                 return 1;
             }
             /*strcpy(LSD[celda].codigo,LSD[cant_LSD-1].codigo);
