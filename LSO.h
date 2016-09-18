@@ -10,8 +10,8 @@ void menu_LSO(int *op)
     while (*op != 0)
     {
         encabezado();
-        printf("Lista Secuencial Ordenada\n"
-               "-------------------------\n"
+        printf("\n\t       Lista Secuencial Ordenada        \n"
+                 "\t       -------------------------        \n"
                "\n[1] Nuevo articulo"
                "\n[2] Eliminar articulo"
                "\n[3] Consultar articulo"
@@ -28,8 +28,8 @@ void menu_LSO(int *op)
             case 1: // -- Nuevo articulo
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n"
-                           "-------------------------\n"
+                    printf("\n\t       Lista Secuencial Ordenada        \n"
+                             "\t       -------------------------        \n"
                            "\n[1] Nuevo articulo");
                     Articulo nuevo;
                     int alta;
@@ -64,8 +64,8 @@ void menu_LSO(int *op)
             case 2: // -- Eliminar articulo
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n"
-                           "-------------------------\n"
+                    printf("\n\t       Lista Secuencial Ordenada        \n"
+                             "\t       -------------------------        \n"
                            "\n[2] Eliminar articulo");
                     char cod[8];
                     int baja;
@@ -84,8 +84,8 @@ void menu_LSO(int *op)
             case 3: // -- Consultar articulo
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n"
-                           "-------------------------\n"
+                    printf("\n\t       Lista Secuencial Ordenada        \n"
+                             "\t       -------------------------        \n"
                            "\n[3] Consultar articulo");
                     char cod[8];
                     printf("\n\nCodigo: ");
@@ -106,8 +106,8 @@ void menu_LSO(int *op)
             case 4: // -- Articulo entregado a club
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n"
-                           "-------------------------\n"
+                    printf("\n\t       Lista Secuencial Ordenada        \n"
+                             "\t       -------------------------        \n"
                            "\n[4] Articulo entregado a club");
                     char cod[8];
                     printf("\n\nCodigo: ");
@@ -125,8 +125,8 @@ void menu_LSO(int *op)
             case 5: // -- Mostrar articulos
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n"
-                           "-------------------------\n");
+                    printf("\n\t       Lista Secuencial Ordenada        \n"
+                             "\t       -------------------------        \n");
                     mostrar_LS(LSO, cant_LSO);
                     system("pause");
                     break;
@@ -134,8 +134,8 @@ void menu_LSO(int *op)
             case 6: // -- Memorizacion previa
                 {
                     encabezado();
-                    printf("Lista Secuencial Ordenada\n"
-                           "-------------------------\n");
+                    printf("\n\t       Lista Secuencial Ordenada        \n"
+                             "\t       -------------------------        \n");
                     memorizacion_previa(2);
                     system("pause");
                     break;
@@ -157,13 +157,13 @@ int localizar_LSO(char codArt[], int *posicion, int conCosto) //-- DEVUELVE: 1.E
         while (li !=ls)
         {
             testigo = (li + ls - 1) / 2;
-            if(strcmp(codArt, LSO[testigo].codigo) <= 0)
+            if(strcmp(codArt, LSO[testigo].codigo) > 0)
             {
-                ls = testigo;
+                li = testigo + 1;
             }
             else
             {
-                li = testigo + 1;
+                ls = testigo;
             }
             consultadas++;
         }

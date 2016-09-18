@@ -13,16 +13,16 @@ void menu_LSD(int *op)
     while (*op != 0)
     {
         encabezado();
-        printf("Lista Secuencial Desordenada\n");
-        printf("_____________________________\n");
-        printf("\n[1] Nuevo articulo");
-        printf("\n[2] Eliminar articulo");
-        printf("\n[3] Consultar articulo");
-        printf("\n[4] Articulo entregado a club");
-        printf("\n[5] Mostrar articulos");
-        printf("\n[6] Memorizacion previa");
-        printf("\n\n[0] Volver\n");
-        printf("\nElija una opcion: ");
+        printf("\n\t     Lista Secuencial Desordenada       \n"
+                 "\t     ----------------------------       \n"
+               "\n[1] Nuevo articulo"
+               "\n[2] Eliminar articulo"
+               "\n[3] Consultar articulo"
+               "\n[4] Articulo entregado a club"
+               "\n[5] Mostrar articulos"
+               "\n[6] Memorizacion previa"
+               "\n\n[0] Volver\n"
+               "\nElija una opcion: ");
         scanf("%d", op);
 
         switch (*op)
@@ -32,8 +32,8 @@ void menu_LSD(int *op)
 
         case 1:
             encabezado();
-            printf("Lista Secuencial Desordenada\n");
-            printf("_________________________\n");
+            printf("\n\t     Lista Secuencial Desordenada       \n"
+                     "\t     ----------------------------       \n");
             printf("\n[1] Nuevo articulo");
             Articulo nuevo;
             printf("\n\n Codigo: \t");
@@ -62,8 +62,8 @@ void menu_LSD(int *op)
 
         case 2:
             encabezado();
-            printf("Lista Secuencial Desordenada\n");
-            printf("_________________________\n");
+            printf("\n\t     Lista Secuencial Desordenada       \n"
+                     "\t     ----------------------------       \n");
             printf("\n[2] Eliminar articulo");
             printf("\n\n Codigo: \t");
             fflush(stdin);
@@ -76,8 +76,8 @@ void menu_LSD(int *op)
 
         case 3:
             encabezado();
-            printf("Lista Secuencial Desordenada\n");
-            printf("_________________________\n");
+            printf("\n\t     Lista Secuencial Desordenada       \n"
+                   "\t     ----------------------------       \n");
             printf("\n[3] Consultar articulo\n");
             printf("\n\n Codigo: \t");
             int aux;
@@ -96,8 +96,8 @@ void menu_LSD(int *op)
 
         case 4:
             encabezado();
-            printf("Lista Secuencial Desordenada\n");
-            printf("_________________________\n");
+            printf("\n\t     Lista Secuencial Desordenada       \n"
+                     "\t     ----------------------------       \n");
             printf("\n[4] Articulo entregado a club\n");
             printf("\n Ingrese el codigo del articulo a consultar: ");
             fflush(stdin);
@@ -110,18 +110,16 @@ void menu_LSD(int *op)
 
         case 5:
             encabezado();
-            printf("Lista Secuencial Desordenada\n");
-            printf("_________________________\n");
-            printf("\n[5] Mostrar Estructura\n");
+            printf("\n\t     Lista Secuencial Desordenada       \n"
+                     "\t     ----------------------------       \n");
             mostrar_LS(LSD,cant_LSD);
             system("pause");
             break;
 
         case 6:
             encabezado();
-            printf("Lista Secuencial Desordenada\n");
-            printf("_________________________\n");
-            printf("\n[6] Memorizacion Previa\n");
+            printf("\n\t     Lista Secuencial Desordenada       \n"
+                     "\t     ----------------------------       \n");
             memorizacion_previa(1);
             system("pause");
             break;
@@ -148,8 +146,8 @@ int localizar_LSD(char codArt[], int *i, int conCosto)            //Localizacion
         (*i)++;
     }
     if (((*i)<cant_LSD)==1 && conCosto==1) {
-            if (maximo_cons_exito_LSD < (*i)){ maximo_cons_exito_LSD = (*i); }
-            celd_cons_exito_LSD+=(*i);}
+            if (maximo_cons_exito_LSD < (*i)+1){ maximo_cons_exito_LSD = (*i)+1; }
+            celd_cons_exito_LSD+=(*i)+1;}
 
     if (((*i)<cant_LSD)==0 && conCosto==1){
             if (maximo_cons_fracaso_LSD < (*i)){ maximo_cons_fracaso_LSD = (*i); }

@@ -209,7 +209,7 @@ void lectura_archivo_operaciones()
     int cod_op,auxiliar;
     Articulo nuevo;
     FILE *fp;
-    if((fp = fopen("OperacionesPrueba.txt", "r")) == NULL)
+    if((fp = fopen("Operaciones.txt", "r")) == NULL)
         printf("\n\nERROR: No se pudo abrir el archivo\n\n");
     else
     {
@@ -256,4 +256,5 @@ void lectura_archivo_operaciones()
     }
     system("pause");
 }
+
 #endif // LISTAS_H_INCLUDED

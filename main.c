@@ -24,6 +24,7 @@ void encabezado()
     printf("\n\t****************************************\n"
              "\t*** ESTRUCTURA DE DATOS Y ALGORITMOS ***\n"
              "\t****************************************\n");
+
 }
 
 // -- MENU ADMINISTRACION
@@ -32,13 +33,13 @@ void administracion()
     while (opcion !=0)
     {
         encabezado();
-        printf("Administracion de estructuras\n");
-        printf("_____________________________\n");
-        printf("\n[1] Lista Secuencial Desordenada");
-        printf("\n[2] Lista Secuencial Ordenada - Busqueda Binaria");
-        printf("\n[3] Lista Vinculada Ordenada");
-        printf("\n\n[0] Volver\n");
-        printf("\nElija una opcion: ");
+        printf("\n\t      Administracion de estructuras      \n"
+                 "\t      -----------------------------      \n"
+               "\n[1] Lista Secuencial Desordenada"
+               "\n[2] Lista Secuencial Ordenada - Busqueda Binaria"
+               "\n[3] Lista Vinculada Ordenada"
+               "\n\n[0] Volver\n"
+               "\nElija una opcion: ");
         scanf("%d", &opcion);
         switch (opcion)
         {
@@ -118,8 +119,8 @@ void comparacion()
 
            "\nCant. de Altas:\t\t\tLSD: %d \tLSO: %d \tLVO: %d"
            "\nCant. de Bajas:\t\t\tLSD: %d \tLSO: %d \tLVO: %d"
-           "\nCant. de Evocaciones-Exito:\tLSD: %d \tLSO: %d \tLVO: %d"
-           "\nCant. de Evocaciones-Fracaso:\tLSD: %d \tLSO: %d \tLVO: %d\n",
+           "\nCant. de Evocaciones-Exito:\tLSD: %d  \tLSO: %d  \tLVO: %d"
+           "\nCant. de Evocaciones-Fracaso:\tLSD: %d  \tLSO: %d  \tLVO: %d\n",
            cant_LSO,cant_altas_LSD, cant_altas_LSO, cant_altas_LVO,
            cant_bajas_LSD, cant_bajas_LSO, cant_bajas_LVO,
            cant_consultas_exito_LSD, cant_evocaciones_exito_LSO, cant_evocaciones_exito_LVO,

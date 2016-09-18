@@ -11,8 +11,8 @@ void menu_LVO(int *op)
     while (*op != 0)
     {
         encabezado();
-        printf("Lista Vinculada Ordenada\n"
-               "------------------------\n"
+        printf("\n\t        Lista Vinculada Ordenada        \n"
+                 "\t        ------------------------        \n"
                "\n[1] Nuevo articulo"
                "\n[2] Eliminar articulo"
                "\n[3] Consultar articulo"
@@ -29,8 +29,8 @@ void menu_LVO(int *op)
             case 1:
                 {
                     encabezado();
-                    printf("Lista Vinculada Ordenada\n"
-                           "------------------------\n"
+                    printf("\n\t        Lista Vinculada Ordenada        \n"
+                             "\t        ------------------------        \n"
                            "\n[1] Nuevo articulo");
                     Articulo nuevo;
                     int alta;
@@ -65,8 +65,8 @@ void menu_LVO(int *op)
             case 2: // -- Eliminar articulo
                 {
                     encabezado();
-                    printf("Lista Vinculada Ordenada\n"
-                           "------------------------\n"
+                    printf("\n\t        Lista Vinculada Ordenada        \n"
+                             "\t        ------------------------        \n"
                            "\n[2] Eliminar articulo");
                     char cod[8];
                     int baja;
@@ -85,8 +85,8 @@ void menu_LVO(int *op)
             case 3: // -- Consultar articulo
                 {
                     encabezado();
-                    printf("Lista Vinculada Ordenada\n"
-                           "------------------------\n"
+                    printf("\n\t        Lista Vinculada Ordenada        \n"
+                             "\t        ------------------------        \n"
                            "\n[3] Consultar articulo");
                     char cod[8];
                     printf("\n\nCodigo: ");
@@ -107,8 +107,8 @@ void menu_LVO(int *op)
             case 4: // -- Articulo entregado a club
                 {
                     encabezado();
-                    printf("Lista Vinculada Ordenada\n"
-                           "------------------------\n"
+                    printf("\n\t        Lista Vinculada Ordenada        \n"
+                             "\t        ------------------------        \n"
                            "\n[4] Articulo entregado a club");
                     char cod[8];
                     printf("\n\nCodigo: ");
@@ -126,8 +126,8 @@ void menu_LVO(int *op)
             case 5: // -- Mostrar articulos
                 {
                     encabezado();
-                    printf("Lista Vinculada Ordenada\n"
-                           "------------------------\n");
+                    printf("\n\t        Lista Vinculada Ordenada        \n"
+                             "\t        ------------------------        \n");
                     mostrar_LVO();
                     system("pause");
                     break;
@@ -135,8 +135,8 @@ void menu_LVO(int *op)
             case 6: // -- Memorizacion previa
                 {
                     encabezado();
-                    printf("Lista Vinculada Ordenada\n"
-                           "------------------------\n");
+                    printf("\n\t        Lista Vinculada Ordenada        \n"
+                             "\t        ------------------------        \n");
                     memorizacion_previa(3);
                     system("pause");
                     break;
