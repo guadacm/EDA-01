@@ -1,17 +1,22 @@
+------------------------- NOTAS y ACLARACIONES: ------------------------- 
+
+* Utilizamos un parametro extra en la funcion Localizar de cada estructura llamado "conCosto", el cual si es 1(cuando 
+es llamado por evocar) voy a contar las celdas consultadas.
+(no siempre es necesario pero por convencion lo utilizamos en las tres estructuras)
+
 -- listas.h:
 * Se encuentran definiciones de constantes, variables y estructuras.
 * Tambien estan las funciones comunes a las listas.
-* Utilizamos un parametro extra en la funcion Localizar de cada estructura llamado "conCosto", el cual si es 1(cuando es llamado por evocar)
-voy a contar las celdas consultadas.
 
 -- LSD.h
-* El costo para un ALTA, siempre es 0(cero) ya que agrego el elemento al final de la lista y por consiguiente no se
-realiza ningun corrimiento
+* El costo para un ALTA (en corrimientos), siempre es 0(cero) ya que agrego el elemento al final de la lista y por 
+consiguiente no se realiza ningun corrimiento
 
 -- LSO.h
-* Al final de la lista usamos un Articulo con codigo "ZZZZZZ"(+inf) para el correcto funcionamiento de la busqueda binaria
+* Al final de la lista usamos un Articulo con codigo "ZZZZZZ"(+inf) para el correcto funcionamiento de la busqueda 
+binaria
 
 -- LVO.h
-* Como inicio de la lista usamos un nodo ficticio, que en el campo dato tiene codigo "000000" y el campo next apunta al primer
-articulo de la lista o a null si esta vacia.
+* Como inicio de la lista usamos un nodo ficticio, que en el campo dato tiene codigo "000000" y el campo next apunta 
+al primer articulo de la lista o a null si esta vacia.
 * Localizar devuelve además del exito, el nodo anterior a donde fracasó o tuvo exito el localizar.

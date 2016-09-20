@@ -1,12 +1,54 @@
 /* -- Grupo 5: Medina, Guadalupe
- *             Montenegro, Luis
- *
- * -- Estructura elegida:
- *
- * -- Funciones de costos:
- *                        - Alta y Baja -> Cantidad de corrimientos para LSD y LSO
- *                                      -> Actualizacion de puntero para LVO
- *                        - Evocaciones -> Cantidad de celdas consultadas para todas las listas
+               Montenegro, Luis
+
+  -- Estructura elegida: Lista Secuencial Ordenada con Busqueda Binaria (LSO BB), porque suponemos que se van a realizar mas
+                         evocaciones que altas y bajas. y los costos de evocaciones son menores con LSO que para las demas
+                         estructuras.
+
+                         Si existieran mas altas que otras operaciones(bajas o evocaciones), elegiriamos LSD
+                         Si existieran mas bajas que otras operaciones(bajas o evocaciones), elegiriamos LVO
+
+
+    El Siguiente cuadro indica que estructura es mejor en costos cada caso (alta,baja, evocacion) siendo la primera la mejor.
+
+m: medio
+M: máximo      _____________________ ______________________ ________________________ ____________________
+              |               (m/M) |                (m/M) |                (m) (M) |              (m/M) |
+              | Altas:MEJOR--> LSD  | Bajas: MEJOR--> LVO  | EvoE: MEJOR--> LSO LSO | EvoF:MEJOR--> LSO  |
+              |                LVO  |                 LSD  |                LVO LSD |               LVO  |
+              |                LSO  |                 LSO  |                LSD LVO |               LSD  |
+              |_____________________|______________________|________________________|____________________|
+
+  -- Funciones de costos:
+                         - Alta y Baja -> Cantidad de corrimientos para LSD y LSO
+                                       -> Actualizacion de puntero para LVO
+                         - Evocaciones -> Cantidad de celdas consultadas para todas las listas
+
+
+
+ ------------------------------------------ NOTAS y ACLARACIONES: ------------------------------------------
+
+* Utilizamos un parametro extra en la funcion Localizar de cada estructura llamado "conCosto", el cual si es 1(cuando
+es llamado por evocar) voy a contar las celdas consultadas.
+(no siempre es necesario pero por convencion lo utilizamos en las tres estructuras)
+
+-- listas.h:
+* Se encuentran definiciones de constantes, variables y estructuras.
+* Tambien estan las funciones comunes a las listas.
+
+-- LSD.h
+* El costo para un ALTA (en corrimientos), siempre es 0(cero) ya que agrego el elemento al final de la lista y por
+consiguiente no se realiza ningun corrimiento
+
+-- LSO.h
+* Al final de la lista usamos un Articulo con codigo "ZZZZZZ"(+inf) para el correcto funcionamiento de la busqueda
+binaria
+
+-- LVO.h
+* Como inicio de la lista usamos un nodo ficticio, que en el campo dato tiene codigo "000000" y el campo next apunta
+al primer articulo de la lista o a null si esta vacia.
+* Localizar devuelve además del exito, el nodo anterior a donde fracasó o tuvo exito el localizar.
+
  */
 #include <stdio.h>
 #include <stdlib.h>
