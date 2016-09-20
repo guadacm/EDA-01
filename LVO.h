@@ -34,23 +34,23 @@ void menu_LVO(int *op)
                            "\n[1] Nuevo articulo");
                     Articulo nuevo;
                     int alta;
-                    printf("\n\nCodigo: ");
+                    printf("\n\n Codigo: \t");
                     fflush(stdin);
                     scanf("%s", nuevo.codigo);
                     strupr(nuevo.codigo);
-                    printf("Articulo: ");
+                    printf(" Articulo:\t");
                     fflush(stdin);
                     fgets(nuevo.articulo, 52, stdin);
-                    printf("Marca: ");
+                    printf(" Marca:\t\t");
                     fflush(stdin);
                     fgets(nuevo.marca, 62, stdin);
-                    printf("Valor: ");
+                    printf(" Valor($):\t");
                     fflush(stdin);
                     scanf("%f", &nuevo.valor);
-                    printf("Cantidad: ");
+                    printf(" Cantidad:\t");
                     fflush(stdin);
                     scanf("%i", &nuevo.cantidad);
-                    printf("Club: ");
+                    printf(" Club:\t\t");
                     fflush(stdin);
                     fgets(nuevo.club, 72, stdin);
                     borrar_salto(&nuevo);
@@ -76,9 +76,9 @@ void menu_LVO(int *op)
                     strupr(cod);
                     baja = baja_LVO(cod, 0);
                     if(baja == 0)
-                        printf("\nEl articulo no existe\n\n");
+                        printf("\nEl articulo %s no fue eliminado o no existe\n\n",cod);
                     else
-                        printf("\nEl articulo fue eliminado con exito\n\n");
+                        printf("\nEl articulo %s fue eliminado con exito\n\n",cod);
                     system("pause");
                     break;
                 }
@@ -100,7 +100,7 @@ void menu_LVO(int *op)
                         printf("\n");
                     }
                     else
-                        printf("\n\nEl articulo no existe\n\n");
+                        printf("\n\t El articulo %s no existe\n\n",cod);
                     system("pause");
                     break;
                 }
@@ -116,9 +116,9 @@ void menu_LVO(int *op)
                     scanf("%s", cod);
                     strupr(cod);
                     if (pertenece_LVO(cod) == 1)
-                        printf("\nArticulo entregado a club\n\n");
+                        printf("\n\t Articulo codigo (%s) entregado a club\n\n",cod);
                     else
-                        printf("\nArticulo NO entregado a club\n\n");
+                        printf("\n\t Articulo codigo (%s) NO entregado a club\n\n",cod);
 
                     system("pause");
                     break;
@@ -161,6 +161,8 @@ int localizar_LVO(char codArt[], Nodo **posicion, int conCosto) //-- DEVUELVE: 1
             aux = aux->next;
 
         }
+        if (aux != NULL)
+            consultadas++;
         *posicion = aux1;
         if((aux != NULL) && strcmp(aux->dato.codigo, codArt) == 0)
             return 1;
@@ -185,18 +187,18 @@ int alta_LVO(Articulo nuevo)
             Nodo *nuevoNodo = malloc(sizeof(Nodo));
             nuevoNodo->dato = nuevo;
 
-            if (loc->next == NULL)
+            /*if (loc->next == NULL)
             {
                 total_corrimientos_alta_LVO += 0.5;
                 if (maximo_alta_LVO < 0.5)
                     maximo_alta_LVO = 0.5;
             }
             else
-            {
-                total_corrimientos_alta_LVO += 1.0;
+            {*/
+                total_corrimientos_alta_LVO += 1.0; // actualizo dos punteros, el del nuevo nodo y el del anterior
                 if (maximo_alta_LVO < 1.0)
                     maximo_alta_LVO = 1.0;
-            }
+            //}
 
             nuevoNodo->next = loc->next;
             loc->next = nuevoNodo;
@@ -205,9 +207,7 @@ int alta_LVO(Articulo nuevo)
             return 1;
         }
         else
-        {
             return 0;
-        }
     }
     else
         return 0;

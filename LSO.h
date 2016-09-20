@@ -33,23 +33,23 @@ void menu_LSO(int *op)
                            "\n[1] Nuevo articulo");
                     Articulo nuevo;
                     int alta;
-                    printf("\n\nCodigo: ");
+                    printf("\n\n Codigo: \t");
                     fflush(stdin);
                     scanf("%s", nuevo.codigo);
                     strupr(nuevo.codigo);
-                    printf("Articulo: ");
+                    printf(" Articulo:\t");
                     fflush(stdin);
                     fgets(nuevo.articulo, 52, stdin);
-                    printf("Marca: ");
+                    printf(" Marca:\t\t");
                     fflush(stdin);
                     fgets(nuevo.marca, 62, stdin);
-                    printf("Valor: ");
+                    printf(" Valor($):\t");
                     fflush(stdin);
                     scanf("%f", &nuevo.valor);
-                    printf("Cantidad: ");
+                    printf(" Cantidad:\t");
                     fflush(stdin);
                     scanf("%i", &nuevo.cantidad);
-                    printf("Club: ");
+                    printf(" Club:\t\t");
                     fflush(stdin);
                     fgets(nuevo.club, 72, stdin);
                     borrar_salto(&nuevo);
@@ -75,9 +75,9 @@ void menu_LSO(int *op)
                     strupr(cod);
                     baja = baja_LSO(cod, 0);
                     if(baja == 0)
-                        printf("\nEl articulo no existe\n\n");
+                        printf("\nEl articulo %s no fue eliminado o no existe\n\n",cod);
                     else
-                        printf("\nEl articulo fue eliminado con exito\n\n");
+                        printf("\nEl articulo %s fue eliminado con exito\n\n",cod);
                     system("pause");
                     break;
                 }
@@ -99,7 +99,7 @@ void menu_LSO(int *op)
                         printf("\n");
                     }
                     else
-                        printf("\n\nEl articulo no existe\n\n");
+                        printf("\n\t El articulo %s no existe\n\n",cod);
                     system("pause");
                     break;
                 }
@@ -115,9 +115,9 @@ void menu_LSO(int *op)
                     scanf("%s", cod);
                     strupr(cod);
                     if (pertenece_LSO(cod) == 1)
-                        printf("\nArticulo entregado a club\n\n");
+                        printf("\n\t Articulo codigo (%s) entregado a club\n\n",cod);
                     else
-                        printf("\nArticulo NO entregado a club\n\n");
+                        printf("\n\t Articulo codigo (%s) NO entregado a club\n\n",cod);
 
                     system("pause");
                     break;
@@ -161,7 +161,7 @@ int localizar_LSO(char codArt[], int *posicion, int conCosto) //-- DEVUELVE: 1.E
         {
             testigo = (li + ls - 1) / 2;
             aux[testigo] = 1;
-            consultadas++;
+            if(conCosto == 1) consultadas++;
             if(strcmp(codArt, LSO[testigo].codigo) > 0)
             {
                 li = testigo + 1;
@@ -173,29 +173,14 @@ int localizar_LSO(char codArt[], int *posicion, int conCosto) //-- DEVUELVE: 1.E
 
         }
         *posicion = li;
-        if(aux[li] == 0 )
+        if(aux[li] == 0 && conCosto == 1)
             consultadas++;
         if(strcmp(codArt, LSO[li].codigo) == 0)
         {
-            /*if (conCosto == 1)
-            {
-                if(maximo_evo_exito_LSO < consultadas)
-                    maximo_evo_exito_LSO = consultadas;
-
-                total_consultadas_exito_LSO = total_consultadas_exito_LSO + consultadas;
-            }*/
-
             return 1;
         }
         else
         {
-            /*if (conCosto == 1)
-            {
-                if(maximo_evo_fracaso_LSO < consultadas)
-                    maximo_evo_fracaso_LSO = consultadas;
-
-                total_consultadas_fracaso_LSO = total_consultadas_fracaso_LSO + consultadas;
-            }*/
 
             return 0;
         }

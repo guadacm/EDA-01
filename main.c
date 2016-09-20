@@ -131,7 +131,6 @@ void comparacion()
            "\nLSD:\t0\t\t0"
            "\nLSO:\t%.2f\t\t%d"
            "\nLVO:\t%.2f\t\t%.2f",
-
            ((float)total_corrimientos_alta_LSO/(float)cant_altas_LSO), maximo_alta_LSO,
            (total_corrimientos_alta_LVO/(float)cant_altas_LVO),maximo_alta_LVO
            );

@@ -55,8 +55,8 @@ void menu_LSD(int *op)
             printf(" Valor($):\t");
             fflush(stdin);
             scanf("%f",&nuevo.valor);
-            if(alta_LSD(nuevo) == 1) printf("\n Enhorabuena tio, El articulo fue agregado con exito\n\n");
-            else printf("\nYa existe ese codigo, ingresaste los datos al pe :( \n\n");
+            if(alta_LSD(nuevo) == 1) printf("\nEl articulo fue agregado con exito\n\n");
+            else printf("\nEl articulo ya existe\n\n");
             system("pause");
             break;
 
@@ -139,7 +139,7 @@ int pertenece_LSD (char codArt [])
 
 int localizar_LSD(char codArt[], int *i, int conCosto)            //Localizacion Exitosa=1, noExitosa=0, i=posicion donde esta el elemento o deberia estar
 {
-    //strupr(codArt);
+
     (*i)=0;
     while((*i)<cant_LSD && (strcmp(LSD[*i].codigo,codArt)!=0))
     {
@@ -196,14 +196,10 @@ int baja_LSD(char codArt[], int tipo)
                 celd_corr_baja_LSD+=0;
                 cant_LSD--;
                 cant_bajas_LSD++;
+                //no pregunto por maximo en este caso(baja de ultimo elemento de la lista) ya que el contador esta inicialmente en 0
                 return 1;
             }
-            /*strcpy(LSD[celda].codigo,LSD[cant_LSD-1].codigo);
-            strcpy(LSD[celda].articulo,LSD[cant_LSD-1].articulo);
-            strcpy(LSD[celda].marca,LSD[cant_LSD-1].marca);
-            strcpy(LSD[celda].club,LSD[cant_LSD-1].club);
-            LSD[celda].cantidad=LSD[cant_LSD-1].cantidad;
-            LSD[celda].valor=LSD[cant_LSD-1].valor;*/
+
             LSD[celda] = LSD[cant_LSD-1];
             cant_LSD--;
             cant_bajas_LSD++;
@@ -229,18 +225,12 @@ Articulo evocar_LSD (char codArt[],int *exito)
     if (ex==1)
     {
         *exito=1;
-        /*if (maximo_cons_exito_LSD < celda){ maximo_cons_exito_LSD = celda; }
-        celd_cons_exito_LSD+=celda;
-        cant_consultas_exito_LSD++;*/
         cant_consultas_exito_LSD++;
         return LSD[celda];
     }
     else
     {
         *exito=0;
-        /*if (maximo_cons_fracaso_LSD < celda){ maximo_cons_fracaso_LSD = celda; }
-        celd_cons_fracaso_LSD+=celda;
-        cant_consultas_fracaso_LSD++;*/
         cant_consultas_fracaso_LSD++;
         return temp;
     }
