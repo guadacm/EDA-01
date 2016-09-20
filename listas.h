@@ -64,7 +64,7 @@ int cant_altas_LSO;
 int cant_bajas_LSO;
 int cant_evocaciones_exito_LSO, cant_evocaciones_fracaso_LSO;
 int total_corrimientos_alta_LSO, total_corrimientos_baja_LSO;
-int total_consultadas_exito_LSO, total_consultadas_fracaso_LSO;
+int total_consultadas_exito_LSO, total_consultadas_fracaso_LSO, consultadas;
 int maximo_alta_LSO, maximo_baja_LSO, maximo_evo_exito_LSO, maximo_evo_fracaso_LSO;
 
 // -- LVO
@@ -129,7 +129,7 @@ void memorizacion_previa(int lista) // lista: 1.LSD - 2.LSO - 3.LVO
     Articulo nuevo;
     FILE *fp;
 
-    if ((fp = fopen("PruebaArticulos.txt", "r")) == NULL)
+    if ((fp = fopen("Articulos.txt", "r")) == NULL)
         printf("\n\nERROR: no se pudo abrir el archivo\n\n");
     else
     {

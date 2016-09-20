@@ -148,55 +148,24 @@ void menu_LVO(int *op)
 
 int localizar_LVO(char codArt[], Nodo **posicion, int conCosto) //-- DEVUELVE: 1.Exito 0.Fracaso
 {
+    consultadas = 0;
     if (cant_LVO >0)
     {
-        int consultadas = 0;
-        Nodo *aux = &LVO;
+        Nodo *aux = LVO.next;
         Nodo *aux1 = &LVO;
-        consultadas++;
         while ((aux != NULL) && (strcmp(aux->dato.codigo, codArt) < 0))
         {
+            if(conCosto == 1)
+                consultadas++;
             aux1 = aux;
             aux = aux->next;
-            consultadas++;
+
         }
         *posicion = aux1;
-        if(aux == NULL)
-        {
-            if(conCosto == 1)
-            {
-                total_consultadas_fracaso_LVO += consultadas;
-                if(maximo_evo_fracaso_LVO < consultadas)
-                    maximo_evo_fracaso_LVO = consultadas;
-            }
-            return 0;
-        }
-
+        if((aux != NULL) && strcmp(aux->dato.codigo, codArt) == 0)
+            return 1;
         else
-        {
-            if(strcmp(aux->dato.codigo, codArt) == 0)
-            {
-                if(conCosto == 1)
-                {
-                    total_consultadas_exito_LVO += consultadas;
-                    if(maximo_evo_exito_LVO < consultadas)
-                        maximo_evo_exito_LVO = consultadas;
-                }
-                return 1;
-            }
-
-            else
-            {
-                if(conCosto == 1)
-                {
-                    total_consultadas_fracaso_LVO += consultadas;
-                    if(maximo_evo_fracaso_LVO < consultadas)
-                        maximo_evo_fracaso_LVO = consultadas;
-                }
-                return 0;
-            }
-
-        }
+            return 0;
     }
     else
     {
@@ -299,11 +268,19 @@ Articulo evocar_LVO(char codArt[])
     strcpy(aux.codigo, "000000");
     if(localizar_LVO(codArt, &loc, 1) == 1)
     {
+        total_consultadas_exito_LVO += consultadas;
+        if(maximo_evo_exito_LVO < consultadas)
+            maximo_evo_exito_LVO = consultadas;
+
         cant_evocaciones_exito_LVO++;
         return loc->next->dato;
     }
     else
     {
+        total_consultadas_fracaso_LVO += consultadas;
+        if(maximo_evo_fracaso_LVO < consultadas)
+            maximo_evo_fracaso_LVO = consultadas;
+
         cant_evocaciones_fracaso_LVO++;
         return aux;
     }
@@ -333,4 +310,5 @@ void mostrar_LVO()
         printf("\n\tTotal de articulos: %d \n\n", cant_LVO);
     }
 }
+
 #endif // LVO_H_INCLUDED

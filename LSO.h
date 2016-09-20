@@ -148,8 +148,11 @@ void menu_LSO(int *op)
 
 int localizar_LSO(char codArt[], int *posicion, int conCosto) //-- DEVUELVE: 1.Exito 0.Fracaso
 {
-    int consultadas = 0;
-    int li, ls, testigo;
+    consultadas = 0;
+    int li, ls, testigo, i;
+    int aux[DIM];
+    for(i = 0; i < DIM; i++)
+        aux[i] = 0;
     if (cant_LSO != 0)
     {
         li = 0;
@@ -157,6 +160,8 @@ int localizar_LSO(char codArt[], int *posicion, int conCosto) //-- DEVUELVE: 1.E
         while (li !=ls)
         {
             testigo = (li + ls - 1) / 2;
+            aux[testigo] = 1;
+            consultadas++;
             if(strcmp(codArt, LSO[testigo].codigo) > 0)
             {
                 li = testigo + 1;
@@ -165,31 +170,32 @@ int localizar_LSO(char codArt[], int *posicion, int conCosto) //-- DEVUELVE: 1.E
             {
                 ls = testigo;
             }
-            consultadas++;
+
         }
         *posicion = li;
-        consultadas++;
+        if(aux[li] == 0 )
+            consultadas++;
         if(strcmp(codArt, LSO[li].codigo) == 0)
         {
-            if (conCosto == 1)
+            /*if (conCosto == 1)
             {
                 if(maximo_evo_exito_LSO < consultadas)
                     maximo_evo_exito_LSO = consultadas;
 
                 total_consultadas_exito_LSO = total_consultadas_exito_LSO + consultadas;
-            }
+            }*/
 
             return 1;
         }
         else
         {
-            if (conCosto == 1)
+            /*if (conCosto == 1)
             {
                 if(maximo_evo_fracaso_LSO < consultadas)
                     maximo_evo_fracaso_LSO = consultadas;
 
                 total_consultadas_fracaso_LSO = total_consultadas_fracaso_LSO + consultadas;
-            }
+            }*/
 
             return 0;
         }
@@ -292,11 +298,22 @@ Articulo evocar_LSO(char codArt[])
     strcpy(aux.codigo, "ZZZZZZ");
     if(localizar_LSO(codArt, &loc, 1) == 1)
     {
+
+        if(maximo_evo_exito_LSO < consultadas)
+            maximo_evo_exito_LSO = consultadas;
+
+        total_consultadas_exito_LSO += consultadas;
+
         cant_evocaciones_exito_LSO++;
         return LSO[loc];
     }
     else
     {
+        if(maximo_evo_fracaso_LSO < consultadas)
+            maximo_evo_fracaso_LSO = consultadas;
+
+        total_consultadas_fracaso_LSO += consultadas;
+
         cant_evocaciones_fracaso_LSO++;
         return aux;
     }
